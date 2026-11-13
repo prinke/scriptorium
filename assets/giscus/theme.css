@@ -153,7 +153,7 @@ main .gsc-comment-box-textarea:focus, main .form-control:focus { box-shadow: non
 
 /* Small-caps labels, as on the page. */
 main .gsc-reactions-count, main .gsc-comments-count, main .gsc-comments-count a,
-main .gsc-comment-replies-count, main .gsc-replies-count, main .gsc-pagination-button,
+main .gsc-replies-count, main .gsc-pagination-button,
 main .btn, main .gsc-comment-box-tabs button {
   font-family: var(--font-family-default);
   font-weight: 400;
@@ -218,23 +218,25 @@ main .gsc-comment-author-avatar img, main .gsc-reply-author-avatar img {
 }
 main .gsc-comment-author time, main .gsc-reply-author time, main .gsc-comment-edited, main .gsc-reply-edited {
   color: {{ .dim }};
-  font-variant-caps: all-small-caps;
-  letter-spacing: .06em;
+  font-style: italic;
   font-size: .95rem;
 }
-main .gsc-comment-author a.link-secondary, main .gsc-reply-author a.link-secondary { text-decoration: none; }
+main .gsc-comment-author a.link-secondary, main .gsc-reply-author a.link-secondary,
+main .gsc-comment-author a.link-secondary *, main .gsc-reply-author a.link-secondary * { text-decoration: none !important; }
+main .gsc-comment-author a.link-secondary:hover time, main .gsc-reply-author a.link-secondary:hover time { color: {{ .rubric }}; }
 main .color-box-border-info {
   color: {{ .gold }};
   border-color: {{ .gold }};
   background: none;
   font-weight: 400;
-  font-variant-caps: all-small-caps;
-  text-transform: none;
-  letter-spacing: .06em;
   font-size: .85rem;
 }
 
-/* Comment text, matching the post body. */
+/* Comment text, matching the post body, always in its own case. */
+main .markdown, main .markdown *, main textarea, main .gsc-reply-box .form-control {
+  font-variant-caps: normal;
+  text-transform: none;
+}
 main .markdown { font-size: 1.0625rem; line-height: 1.6; }
 main .markdown a { color: {{ .rubric }}; text-decoration: underline; text-decoration-color: {{ .gold }}; text-underline-offset: .15em; }
 main .markdown a:hover { text-decoration-color: currentColor; }
@@ -255,7 +257,7 @@ main .gsc-social-reaction-summary-item.has-reacted { border-color: {{ .gold }}; 
 main .gsc-social-reaction-summary-item-count { color: {{ .dim }}; }
 main .gsc-reactions-button svg, main .gsc-upvote-button svg { fill: {{ .dim }}; }
 main .gsc-reactions-popover { background: {{ .ink1 }}; border-color: {{ .ink2 }}; }
-main .gsc-comment-replies-count, main .gsc-comment-replies-count span { color: {{ .dim }}; font-size: .95rem; }
+main .gsc-comment-replies-count, main .gsc-comment-replies-count span { color: {{ .dim }}; font-size: .95rem; font-style: italic; }
 
 /* Replies sit inside the comment, set off by a rule. */
 main .gsc-replies { border-top: 1px solid {{ .ink2 }}; background: transparent; padding-left: 1.25rem; }
