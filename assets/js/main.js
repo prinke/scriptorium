@@ -101,6 +101,22 @@ if (mount) {
     loading: 'lazy',
   };
   for (const [k, v] of Object.entries(attrs)) s.setAttribute(`data-${k}`, v);
+
+  // Under `hugo server` the comment theme lives on localhost. Chromium-based browsers
+  // only let the giscus.app frame load it if the frame is granted local network access,
+  // which giscus's own script doesn't do, so add it and restart the frame once.
+  const localTheme = /^http:\/\/(localhost|127\.0\.0\.1|\[::1\])(:|\/)/.test(attrs.theme || '');
+  if (localTheme) {
+    new MutationObserver((_, obs) => {
+      const frame = mount.querySelector('iframe.giscus-frame');
+      if (!frame) return;
+      obs.disconnect();
+      const allow = new Set((frame.getAttribute('allow') || '').split(';').map((x) => x.trim()).filter(Boolean));
+      ['local-network-access', 'local-network', 'loopback-network'].forEach((p) => allow.add(p));
+      frame.setAttribute('allow', [...allow].join('; '));
+      frame.src = frame.src;
+    }).observe(mount, { childList: true, subtree: true });
+  }
   mount.appendChild(s);
 }
 

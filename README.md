@@ -154,8 +154,10 @@ site, so your server must allow cross-origin requests for `/giscus/*` and `/font
         Access-Control-Allow-Origin = '*'
   ```
 
-  Browsers may ask whether giscus.app can reach your local network; allow it to see the
-  styled frame locally.
+  Browsers also stop a public site like giscus.app from loading files from `localhost`
+  unless you allow *local network access* for your dev site. Chrome, Brave and Edge show a
+  prompt, or you can allow it under the site settings for `http://localhost:1313`. Until
+  then the frame uses Giscus's plain default look locally. The live site isn't affected.
 - **GitHub Pages**: nothing to do; it already sends the header.
 - **Netlify or Cloudflare Pages**: create `static/_headers` in your site:
 
