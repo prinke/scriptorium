@@ -91,6 +91,7 @@ if (mount) {
     category: mount.dataset.category,
     'category-id': mount.dataset.categoryId,
     mapping: mount.dataset.mapping,
+    ...(mount.dataset.term ? { term: mount.dataset.term } : {}),
     strict: '1',
     'reactions-enabled': '1',
     'emit-metadata': '0',

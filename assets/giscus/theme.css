@@ -1,0 +1,245 @@
+/* Scriptorium theme for Giscus ({{ .name }}).
+   Rendered by layouts/_partials/giscus.html once per mode and loaded by giscus.app inside
+   its iframe, so the host must serve this file and the fonts with an
+   Access-Control-Allow-Origin header (see the README). */
+
+{{- $latin := "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD" }}
+{{- $ext := "U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF" }}
+{{- $greek := "U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF" }}
+{{- $greekExt := "U+1F00-1FFF" }}
+{{- $faces := slice
+  (slice "EB Garamond" "eb-garamond-latin-400-normal" "normal" 400 $latin)
+  (slice "EB Garamond" "eb-garamond-latin-ext-400-normal" "normal" 400 $ext)
+  (slice "EB Garamond" "eb-garamond-greek-400-normal" "normal" 400 $greek)
+  (slice "EB Garamond" "eb-garamond-greek-ext-400-normal" "normal" 400 $greekExt)
+  (slice "EB Garamond" "eb-garamond-latin-400-italic" "italic" 400 $latin)
+  (slice "EB Garamond" "eb-garamond-latin-ext-400-italic" "italic" 400 $ext)
+  (slice "EB Garamond" "eb-garamond-latin-500-normal" "normal" 500 $latin)
+  (slice "EB Garamond" "eb-garamond-latin-ext-500-normal" "normal" 500 $ext)
+  (slice "Cormorant Garamond" "cormorant-garamond-latin-600-normal" "normal" 600 $latin)
+  (slice "Cormorant Garamond" "cormorant-garamond-latin-ext-600-normal" "normal" 600 $ext)
+  (slice "Cormorant Garamond" "cormorant-garamond-latin-500-italic" "italic" 500 $latin)
+  (slice "JetBrains Mono" "jetbrains-mono-latin-400-normal" "normal" 400 $latin)
+  (slice "JetBrains Mono" "jetbrains-mono-latin-ext-400-normal" "normal" 400 $ext)
+}}
+{{- range $faces }}
+@font-face {
+  font-family: "{{ index . 0 }}";
+  src: url("../fonts/{{ index . 1 }}.woff2") format("woff2");
+  font-style: {{ index . 2 }};
+  font-weight: {{ index . 3 }};
+  font-display: swap;
+  unicode-range: {{ index . 4 }};
+}
+{{- end }}
+
+main {
+  --font-family-default: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+  --font-family-sans: var(--font-family-default);
+  --font-family-monospace: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+
+  --color-prettylights-syntax-comment: {{ .dim }};
+  --color-prettylights-syntax-constant: {{ .rubric }};
+  --color-prettylights-syntax-entity: {{ .gold }};
+  --color-prettylights-syntax-storage-modifier-import: {{ .text }};
+  --color-prettylights-syntax-entity-tag: {{ .verdigris }};
+  --color-prettylights-syntax-keyword: {{ .gold }};
+  --color-prettylights-syntax-string: {{ .verdigris }};
+  --color-prettylights-syntax-variable: {{ .rubric }};
+  --color-prettylights-syntax-brackethighlighter-unmatched: {{ .rubric }};
+  --color-prettylights-syntax-brackethighlighter-angle: {{ .dim }};
+  --color-prettylights-syntax-invalid-illegal-text: #F3EBDC;
+  --color-prettylights-syntax-invalid-illegal-bg: #7A2626;
+  --color-prettylights-syntax-carriage-return-text: #F3EBDC;
+  --color-prettylights-syntax-carriage-return-bg: #7A2626;
+  --color-prettylights-syntax-string-regexp: {{ .verdigris }};
+  --color-prettylights-syntax-markup-list: {{ .gold }};
+  --color-prettylights-syntax-markup-heading: {{ .gold }};
+  --color-prettylights-syntax-markup-italic: {{ .text }};
+  --color-prettylights-syntax-markup-bold: {{ .text }};
+  --color-prettylights-syntax-markup-deleted-text: {{ .rubric }};
+  --color-prettylights-syntax-markup-deleted-bg: {{ .ink1 }};
+  --color-prettylights-syntax-markup-inserted-text: {{ .verdigris }};
+  --color-prettylights-syntax-markup-inserted-bg: {{ .ink1 }};
+  --color-prettylights-syntax-markup-changed-text: {{ .gold }};
+  --color-prettylights-syntax-markup-changed-bg: {{ .ink1 }};
+  --color-prettylights-syntax-markup-ignored-text: {{ .text }};
+  --color-prettylights-syntax-markup-ignored-bg: {{ .ink2 }};
+  --color-prettylights-syntax-meta-diff-range: {{ .gold }};
+  --color-prettylights-syntax-sublimelinter-gutter-mark: {{ .ink2 }};
+  --color-prettylights-syntax-constant-other-reference-link: {{ .rubric }};
+
+  --color-btn-text: {{ .text }};
+  --color-btn-bg: transparent;
+  --color-btn-border: {{ .ink2 }};
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: {{ .ink1 }};
+  --color-btn-hover-border: {{ .gold }};
+  --color-btn-active-bg: {{ .ink2 }};
+  --color-btn-active-border: {{ .gold }};
+  --color-btn-selected-bg: {{ .ink1 }};
+  --color-btn-primary-text: #F3EBDC;
+  --color-btn-primary-bg: #7A2626;
+  --color-btn-primary-border: #7A2626;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #8E2F2F;
+  --color-btn-primary-hover-border: #8E2F2F;
+  --color-btn-primary-selected-bg: #6A2020;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: rgb(243 235 220 / 60%);
+  --color-btn-primary-disabled-bg: rgb(122 38 38 / 55%);
+  --color-btn-primary-disabled-border: transparent;
+
+  --color-action-list-item-default-hover-bg: {{ .ink1 }};
+  --color-segmented-control-bg: {{ .ink1 }};
+  --color-segmented-control-button-bg: {{ .ink0 }};
+  --color-segmented-control-button-selected-border: {{ .ink2 }};
+
+  --color-fg-default: {{ .text }};
+  --color-fg-muted: {{ .dim }};
+  --color-fg-subtle: {{ .dim }};
+  --color-canvas-default: {{ .ink0 }};
+  --color-canvas-overlay: {{ .ink1 }};
+  --color-canvas-inset: {{ .ink0 }};
+  --color-canvas-subtle: {{ .ink1 }};
+  --color-border-default: {{ .ink2 }};
+  --color-border-muted: {{ .ink2 }};
+  --color-neutral-muted: {{ .ink2 }};
+  --color-accent-fg: {{ .rubric }};
+  --color-accent-emphasis: #7A2626;
+  --color-accent-muted: {{ .gold }};
+  --color-accent-subtle: {{ .ink1 }};
+  --color-success-fg: {{ .verdigris }};
+  --color-attention-fg: {{ .gold }};
+  --color-attention-muted: {{ .gold }};
+  --color-attention-subtle: {{ .ink1 }};
+  --color-danger-fg: {{ .rubric }};
+  --color-danger-muted: {{ .rubric }};
+  --color-danger-subtle: {{ .ink1 }};
+  --color-primer-shadow-inset: none;
+  --color-scale-gray-7: {{ .ink2 }};
+  --color-scale-blue-8: {{ .ink1 }};
+  --color-social-reaction-bg-hover: {{ .ink2 }};
+  --color-social-reaction-bg-reacted-hover: {{ .ink2 }};
+
+  font-family: var(--font-family-default);
+  font-size: 1.0625rem;
+  color: var(--color-fg-default);
+}
+
+/* Square corners everywhere except avatars, as on the page. */
+main [class*="rounded"]:not([class*="rounded-full"]),
+main .btn, main .Box, main .BtnGroup, main .BtnGroup-item,
+main .gsc-comment-box, main .gsc-comment-box-textarea, main .gsc-reactions-popover {
+  border-radius: 2px !important;
+}
+
+/* Header: "N comments · M replies", set like the page's small-caps labels. */
+main .gsc-header { border-bottom: 1px solid {{ .ink2 }}; padding-bottom: .5rem; }
+main .gsc-left-header, main .gsc-comments-count {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  color: {{ .dim }};
+}
+main .gsc-comments-count-separator { color: {{ .gold }}; }
+
+/* Comments: hairline rules and a quiet header band, no boxes floating on the page. */
+/* Transparent, so the page's paper texture shows through the frame. */
+main .gsc-comment > div, main .gsc-comment-box, main .gsc-comment-box-main {
+  border-color: {{ .ink2 }};
+  background: transparent;
+}
+main .gsc-comment-header, main .gsc-reply-header { font-size: .95rem; }
+main .gsc-comment-author, main .gsc-reply-author { font-family: var(--display); font-weight: 600; font-size: 1.1rem; }
+main .gsc-comment-author a, main .gsc-reply-author a { color: {{ .text }}; }
+main .gsc-comment-author a:hover, main .gsc-reply-author a:hover { color: {{ .rubric }}; }
+main .gsc-comment-author time, main .gsc-reply-author time,
+main .gsc-comment-header a.link-secondary, main .gsc-reply-header a.link-secondary {
+  font-style: italic;
+  color: {{ .dim }};
+}
+main .gsc-comment-author-avatar img, main .gsc-reply-author-avatar img {
+  box-shadow: 0 0 0 1px {{ .ink2 }};
+  filter: sepia(.25);
+}
+main .gsc-replies { border-top-color: {{ .ink2 }}; background: {{ .ink1 }}; }
+main .gsc-tl-line { background: {{ .ink2 }}; }
+
+/* Comment text, matching the post body. */
+main .markdown { font-size: 1.0625rem; line-height: 1.6; }
+main .markdown a { color: {{ .rubric }}; text-decoration: underline; text-decoration-color: {{ .gold }}; text-underline-offset: .15em; }
+main .markdown a:hover { text-decoration-color: currentColor; }
+main .markdown blockquote {
+  border-left: 2px solid {{ .gold }};
+  color: {{ .dim }};
+  font-style: italic;
+  padding: 0 1em;
+}
+main .markdown h1, main .markdown h2, main .markdown h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  border-bottom: 0;
+}
+main .markdown hr { background: none; border: 0; height: auto; text-align: center; }
+main .markdown hr::after { content: "❦"; color: {{ .gold }}; }
+main .markdown code { font-size: .82em; background: {{ .ink1 }}; border: 1px solid {{ .ink2 }}; }
+main .markdown pre, main .markdown .highlight pre { font-size: .8rem; background: {{ .ink1 }}; border: 1px solid {{ .ink2 }}; border-left: 2px solid {{ .gold }}; }
+main .markdown pre code { border: 0; background: none; }
+
+/* Buttons: small caps, like the page's controls. */
+main .btn {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: .04em;
+  font-variant: small-caps;
+}
+main .btn-primary:focus-visible, main .btn:focus-visible { outline: 2px solid {{ .gold }}; outline-offset: 2px; }
+
+/* Comment box. */
+main .gsc-comment-box-tabs { background: {{ .ink1 }}; border-color: {{ .ink2 }}; }
+main .gsc-comment-box-tabs .tabnav-tab {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  font-size: 1rem;
+}
+main .gsc-comment-box-textarea {
+  font-family: var(--font-family-default);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  background: transparent;
+  color: {{ .text }};
+}
+main .gsc-comment-box-textarea-extras, main .gsc-comment-box-tabs .tabnav-tab.selected { background: transparent; }
+main .gsc-comment-box-textarea::placeholder { color: {{ .dim }}; font-style: italic; }
+main .gsc-comment-box-textarea:focus { border-color: {{ .gold }}; box-shadow: none; outline: none; }
+main .gsc-comment-box-markdown-hint, main .gsc-comment-box-markdown-hint a { color: {{ .dim }}; }
+
+/* Reactions. */
+main .gsc-reactions-count {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  color: {{ .dim }};
+}
+main .gsc-social-reaction-summary-item { border-color: {{ .ink2 }}; background: transparent; }
+main .gsc-social-reaction-summary-item.has-reacted { border-color: {{ .gold }}; background: {{ .ink1 }}; }
+main .gsc-social-reaction-summary-item-count { color: {{ .dim }}; }
+main .gsc-reactions-popover { background: {{ .ink1 }}; border-color: {{ .ink2 }}; }
+
+main .gsc-pagination-button { font-family: var(--display); font-variant: small-caps; color: {{ .rubric }}; }
+
+/* Loading states without GitHub's grey mascots. */
+main .pagination-loader-container { background-image: none; }
+main .gsc-loading-image { background-image: none; }
+main .gsc-loading-text { font-style: italic; color: {{ .dim }}; }

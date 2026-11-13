@@ -1,9 +1,13 @@
 {{- /* Giscus comments. The script is injected by main.js so it can match the reader's theme. */ -}}
 {{- with site.Params.giscus }}{{ if and .repo .repoId .categoryId }}
-{{- $dark := "noborder_dark" }}{{ $light := "noborder_light" }}
-{{- if not hugo.IsDevelopment }}
-  {{- $dark = "giscus/nocturne.css" | absURL }}{{ $light = "giscus/vellum.css" | absURL }}
-{{- end }}
+{{- /* The comment frame is styled by assets/giscus/theme.css, rendered once per mode.
+       giscus.app loads it cross-origin, so the host must allow that (see the README).
+       params.giscus.themeDark / themeLight replace it with any Giscus theme name or URL. */ -}}
+{{- $tpl := resources.Get "giscus/theme.css" }}
+{{- $nocturne := dict "name" "Nocturne" "ink0" "#14110F" "ink1" "#1C1815" "ink2" "#28211C" "text" "#E6DCC6" "dim" "#A8997E" "gold" "#C2A066" "rubric" "#CC6F5C" "verdigris" "#7FA894" }}
+{{- $vellum := dict "name" "Vellum" "ink0" "#F2EADA" "ink1" "#E9DFC9" "ink2" "#D6C8AC" "text" "#2A211B" "dim" "#65564A" "gold" "#8A6A2F" "rubric" "#8B2E2E" "verdigris" "#3D6B57" }}
+{{- $dark := .themeDark | default (resources.ExecuteAsTemplate "giscus/nocturne.css" $nocturne $tpl | minify | fingerprint).Permalink }}
+{{- $light := .themeLight | default (resources.ExecuteAsTemplate "giscus/vellum.css" $vellum $tpl | minify | fingerprint).Permalink }}
 <section class="responsa" aria-labelledby="responsa-h">
   <h2 id="responsa-h">{{ T "comments" }}</h2>
   <p class="responsa-note">{{ T "commentsNote" }}</p>
@@ -13,6 +17,7 @@
     data-category="{{ .category }}"
     data-category-id="{{ .categoryId }}"
     data-mapping="{{ .mapping | default "pathname" }}"
+    {{- with .term }} data-term="{{ . }}"{{ end }}
     data-theme-dark="{{ $dark }}"
     data-theme-light="{{ $light }}"
     data-lang="{{ .lang | default "en" }}"></div>

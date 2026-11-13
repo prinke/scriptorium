@@ -132,9 +132,44 @@ for sections that don't have many links.
 ```
 
 Get the values from [giscus.app](https://giscus.app). Comments appear on posts once `repo`,
-`repoId` and `categoryId` are set. On the live site the comment box uses the theme's own
-colors, which giscus.app loads from `/giscus/nocturne.css` and `/giscus/vellum.css` on your
-site. Locally it uses Giscus's built-in themes.
+`repoId` and `categoryId` are set. An **Announcement**-type category is best, so that only
+Giscus can start threads.
+
+The comment frame is styled to match the theme: same fonts, colors and small caps, in both
+modes, following the reader's toggle. Giscus loads that stylesheet and the fonts from your
+site, so your server must allow cross-origin requests for `/giscus/*` and `/fonts/*`:
+
+- **`hugo server`**: add this to your `hugo.toml` (Hugo doesn't read `[server]` from a theme):
+
+  ```toml
+  [server]
+    [[server.headers]]
+      for = '/giscus/**'
+      [server.headers.values]
+        Access-Control-Allow-Origin = '*'
+    [[server.headers]]
+      for = '/fonts/**'
+      [server.headers.values]
+        Access-Control-Allow-Origin = '*'
+  ```
+
+  Browsers may ask whether giscus.app can reach your local network; allow it to see the
+  styled frame locally.
+- **GitHub Pages**: nothing to do; it already sends the header.
+- **Netlify or Cloudflare Pages**: create `static/_headers` in your site:
+
+  ```
+  /giscus/*
+    Access-Control-Allow-Origin: *
+  /fonts/*
+    Access-Control-Allow-Origin: *
+  ```
+
+- **Anywhere else**: set `Access-Control-Allow-Origin: *` on those two paths.
+
+Without the header, Giscus falls back to its default look. To use a different Giscus theme,
+set `themeDark` and `themeLight` under `[params.giscus]` to a theme name (`noborder_dark`)
+or a stylesheet URL. `term` is also available for the `specific` and `number` mappings.
 
 ### Blue Letter Bible verse pop-ups
 
