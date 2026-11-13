@@ -75,11 +75,11 @@ main {
   --color-btn-border: {{ .ink2 }};
   --color-btn-shadow: none;
   --color-btn-inset-shadow: none;
-  --color-btn-hover-bg: {{ .ink1 }};
+  --color-btn-hover-bg: transparent;
   --color-btn-hover-border: {{ .gold }};
-  --color-btn-active-bg: {{ .ink2 }};
+  --color-btn-active-bg: transparent;
   --color-btn-active-border: {{ .gold }};
-  --color-btn-selected-bg: {{ .ink1 }};
+  --color-btn-selected-bg: transparent;
   --color-btn-primary-text: #F3EBDC;
   --color-btn-primary-bg: #7A2626;
   --color-btn-primary-border: #7A2626;
@@ -103,7 +103,7 @@ main {
   --color-fg-subtle: {{ .dim }};
   --color-canvas-default: {{ .ink0 }};
   --color-canvas-overlay: {{ .ink1 }};
-  --color-canvas-inset: {{ .ink0 }};
+  --color-canvas-inset: {{ .ink1 }};
   --color-canvas-subtle: {{ .ink1 }};
   --color-border-default: {{ .ink2 }};
   --color-border-muted: {{ .ink2 }};
@@ -130,114 +130,140 @@ main {
   color: var(--color-fg-default);
 }
 
-/* Square corners everywhere except avatars, as on the page. */
-main [class*="rounded"]:not([class*="rounded-full"]),
-main .btn, main .Box, main .BtnGroup, main .BtnGroup-item,
-main .gsc-comment-box, main .gsc-comment-box-textarea, main .gsc-reactions-popover {
+/* Same scheme as the page, so the frame stays transparent and native parts
+   (scrollbars, the resize grip, selection) match. */
+:root { color-scheme: {{ .scheme }}; }
+::selection { background: {{ .gold }}; color: {{ .ink0 }}; }
+/* Thin scrollbars in the palette; system ones can be bright white beside code. */
+main, main * { scrollbar-color: {{ .ink2 }} transparent; scrollbar-width: thin; }
+
+/* No rounded corners except avatars and reaction pills. */
+main [class*="rounded"]:not([class*="rounded-full"]):not(.gsc-social-reaction-summary-item),
+main .btn, main .BtnGroup, main .BtnGroup-item, main .form-control,
+main .gsc-comment-box, main .gsc-reactions-popover {
   border-radius: 2px !important;
 }
 
-/* Header: "N comments · M replies", set like the page's small-caps labels. */
-main .gsc-header { border-bottom: 1px solid {{ .ink2 }}; padding-bottom: .5rem; }
-main .gsc-left-header, main .gsc-comments-count {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 1.15rem;
-  font-variant: small-caps;
-  letter-spacing: .04em;
-  color: {{ .dim }};
-}
-main .gsc-comments-count-separator { color: {{ .gold }}; }
+/* One quiet focus style instead of GitHub's glow. */
+main :focus-visible { outline: 1px dotted {{ .gold }} !important; outline-offset: 2px !important; box-shadow: none !important; }
+main .gsc-comment-box-write:focus-within { box-shadow: none !important; border-color: {{ .gold }} !important; }
+main .gsc-comment-box-write:focus-within .gsc-comment-box-textarea,
+main .gsc-comment-box-write:focus-within .gsc-comment-box-textarea-extras { border-color: {{ .gold }} !important; }
+main .gsc-comment-box-textarea:focus, main .form-control:focus { box-shadow: none !important; outline: none !important; }
 
-/* Comments: hairline rules and a quiet header band, no boxes floating on the page. */
-/* Transparent, so the page's paper texture shows through the frame. */
-main .gsc-comment > div, main .gsc-comment-box, main .gsc-comment-box-main {
+/* Small-caps labels, as on the page. */
+main .gsc-reactions-count, main .gsc-comments-count, main .gsc-comments-count a,
+main .gsc-comment-replies-count, main .gsc-replies-count, main .gsc-pagination-button,
+main .btn, main .gsc-comment-box-tabs button {
+  font-family: var(--font-family-default);
+  font-weight: 400;
+  font-variant-caps: all-small-caps;
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+
+/* Thread header: "1 comment", the giscus credit and the sort order as plain text. */
+main .gsc-header { border-bottom: 1px solid {{ .ink2 }}; padding-bottom: .5rem; margin-bottom: 0; }
+main .gsc-comments { row-gap: 1.25rem; }
+main .gsc-comment-box { margin-top: 0; }
+main .gsc-comments-count a { text-decoration: underline !important; text-decoration-color: {{ .ink2 }} !important; text-underline-offset: .25em; }
+main .gsc-comments-count, main .gsc-comments-count a { font-size: 1.05rem; color: {{ .dim }}; }
+main .gsc-left-header em, main .gsc-left-header em a { font-size: .8rem; color: {{ .dim }}; opacity: .8; }
+main .gsc-right-header.BtnGroup { border: 0; background: none; }
+main .gsc-right-header .BtnGroup-item { border: 0; background: none; padding: 0; }
+main .gsc-right-header .btn { color: {{ .dim }}; font-size: 1rem; padding: 0 .4rem; }
+main .gsc-right-header .BtnGroup-item--selected .btn { color: {{ .text }}; text-decoration: underline; text-decoration-color: {{ .gold }}; text-underline-offset: .25em; }
+
+/* Reactions on the whole post. */
+main .gsc-reactions-count, main .gsc-reactions-count a { font-size: 1.05rem; color: {{ .dim }}; }
+
+/* Comment box: filled like a comment, hairline borders, gold on focus. */
+main .gsc-comment-box { border: 0; background: none; }
+main .gsc-comment-box-tabs { background: none; border-color: {{ .ink2 }}; }
+main .gsc-comment-box-tabs button { font-size: 1rem; color: {{ .dim }}; }
+main .gsc-comment-box-tabs button.color-bg-canvas { background: {{ .ink1 }}; color: {{ .text }}; border-color: {{ .ink2 }}; }
+main .gsc-comment-box-main { padding-left: 0; padding-right: 0; }
+main .gsc-comment-box-textarea, main .gsc-comment-box-textarea-extras, main .gsc-comment-box-preview {
+  background: {{ .ink1 }};
   border-color: {{ .ink2 }};
-  background: transparent;
-}
-main .gsc-comment-header, main .gsc-reply-header { font-size: .95rem; }
-main .gsc-comment-author, main .gsc-reply-author { font-family: var(--display); font-weight: 600; font-size: 1.1rem; }
-main .gsc-comment-author a, main .gsc-reply-author a { color: {{ .text }}; }
-main .gsc-comment-author a:hover, main .gsc-reply-author a:hover { color: {{ .rubric }}; }
-main .gsc-comment-author time, main .gsc-reply-author time,
-main .gsc-comment-header a.link-secondary, main .gsc-reply-header a.link-secondary {
-  font-style: italic;
-  color: {{ .dim }};
-}
-main .gsc-comment-author-avatar img, main .gsc-reply-author-avatar img {
-  box-shadow: 0 0 0 1px {{ .ink2 }};
-  filter: sepia(.25);
-}
-main .gsc-replies { border-top-color: {{ .ink2 }}; background: {{ .ink1 }}; }
-main .gsc-tl-line { background: {{ .ink2 }}; }
-
-/* Comment text, matching the post body. */
-main .markdown { font-size: 1.0625rem; line-height: 1.6; }
-main .markdown a { color: {{ .rubric }}; text-decoration: underline; text-decoration-color: {{ .gold }}; text-underline-offset: .15em; }
-main .markdown a:hover { text-decoration-color: currentColor; }
-main .markdown blockquote {
-  border-left: 2px solid {{ .gold }};
-  color: {{ .dim }};
-  font-style: italic;
-  padding: 0 1em;
-}
-main .markdown h1, main .markdown h2, main .markdown h3 {
-  font-family: var(--display);
-  font-weight: 600;
-  border-bottom: 0;
-}
-main .markdown hr { background: none; border: 0; height: auto; text-align: center; }
-main .markdown hr::after { content: "❦"; color: {{ .gold }}; }
-main .markdown code { font-size: .82em; background: {{ .ink1 }}; border: 1px solid {{ .ink2 }}; }
-main .markdown pre, main .markdown .highlight pre { font-size: .8rem; background: {{ .ink1 }}; border: 1px solid {{ .ink2 }}; border-left: 2px solid {{ .gold }}; }
-main .markdown pre code { border: 0; background: none; }
-
-/* Buttons: small caps, like the page's controls. */
-main .btn {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: .04em;
-  font-variant: small-caps;
-}
-main .btn-primary:focus-visible, main .btn:focus-visible { outline: 2px solid {{ .gold }}; outline-offset: 2px; }
-
-/* Comment box. */
-main .gsc-comment-box-tabs { background: {{ .ink1 }}; border-color: {{ .ink2 }}; }
-main .gsc-comment-box-tabs .tabnav-tab {
-  font-family: var(--display);
-  font-weight: 600;
-  font-variant: small-caps;
-  letter-spacing: .04em;
-  font-size: 1rem;
 }
 main .gsc-comment-box-textarea {
   font-family: var(--font-family-default);
   font-size: 1.0625rem;
   line-height: 1.55;
-  background: transparent;
   color: {{ .text }};
 }
-main .gsc-comment-box-textarea-extras, main .gsc-comment-box-tabs .tabnav-tab.selected { background: transparent; }
 main .gsc-comment-box-textarea::placeholder { color: {{ .dim }}; font-style: italic; }
-main .gsc-comment-box-textarea:focus { border-color: {{ .gold }}; box-shadow: none; outline: none; }
-main .gsc-comment-box-markdown-hint, main .gsc-comment-box-markdown-hint a { color: {{ .dim }}; }
+main .gsc-comment-box-markdown-hint, main .gsc-comment-box-markdown-hint svg, main .gsc-toolbar-item svg { color: {{ .dim }}; fill: currentColor; opacity: .8; }
+main .gsc-comment-box-bottom { margin-left: 0; margin-right: 0; }
+main .btn-primary { font-size: 1.05rem; padding: .2rem 1rem; }
 
-/* Reactions. */
-main .gsc-reactions-count {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 1.15rem;
-  font-variant: small-caps;
-  letter-spacing: .04em;
-  color: {{ .dim }};
+/* Comments: cards like the rest of the page. */
+main .gsc-comment > div {
+  background: {{ .ink1 }};
+  border: 1px solid {{ .ink2 }};
 }
-main .gsc-social-reaction-summary-item { border-color: {{ .ink2 }}; background: transparent; }
-main .gsc-social-reaction-summary-item.has-reacted { border-color: {{ .gold }}; background: {{ .ink1 }}; }
-main .gsc-social-reaction-summary-item-count { color: {{ .dim }}; }
-main .gsc-reactions-popover { background: {{ .ink1 }}; border-color: {{ .ink2 }}; }
+main .gsc-comment-header { padding: .75rem 1.25rem 0; }
+main .gsc-comment-content, main .gsc-reply-content { padding: .4rem 1.25rem .75rem; }
+main .gsc-comment-footer { padding: 0 1.25rem .6rem; }
+main .gsc-comment-author, main .gsc-reply-author { gap: .6rem; align-items: baseline; }
+main .gsc-comment-author-avatar, main .gsc-reply-author-avatar { color: {{ .text }}; }
+main .gsc-comment-author-avatar span, main .gsc-reply-author-avatar span { font-weight: 500; color: {{ .text }}; }
+main .gsc-comment-author-avatar:hover span, main .gsc-reply-author-avatar:hover span { color: {{ .rubric }}; }
+main .gsc-comment-author-avatar img, main .gsc-reply-author-avatar img {
+  width: 22px; height: 22px;
+  filter: sepia(.35) saturate(.8);
+  background: {{ .ink2 }};
+  color: transparent;
+}
+main .gsc-comment-author time, main .gsc-reply-author time, main .gsc-comment-edited, main .gsc-reply-edited {
+  color: {{ .dim }};
+  font-variant-caps: all-small-caps;
+  letter-spacing: .06em;
+  font-size: .95rem;
+}
+main .gsc-comment-author a.link-secondary, main .gsc-reply-author a.link-secondary { text-decoration: none; }
+main .color-box-border-info {
+  color: {{ .gold }};
+  border-color: {{ .gold }};
+  background: none;
+  font-weight: 400;
+  font-variant-caps: all-small-caps;
+  text-transform: none;
+  letter-spacing: .06em;
+  font-size: .85rem;
+}
 
-main .gsc-pagination-button { font-family: var(--display); font-variant: small-caps; color: {{ .rubric }}; }
+/* Comment text, matching the post body. */
+main .markdown { font-size: 1.0625rem; line-height: 1.6; }
+main .markdown a { color: {{ .rubric }}; text-decoration: underline; text-decoration-color: {{ .gold }}; text-underline-offset: .15em; }
+main .markdown a:hover { text-decoration-color: currentColor; }
+main .markdown blockquote { border-left: 2px solid {{ .gold }}; color: {{ .dim }}; font-style: italic; padding: 0 1em; }
+main .markdown h1, main .markdown h2, main .markdown h3 { font-family: var(--display); font-weight: 600; border-bottom: 0; }
+main .markdown hr { background: none; border: 0; height: auto; text-align: center; }
+main .markdown hr::after { content: "❦"; color: {{ .gold }}; }
+main .markdown code { font-size: .82em; background: {{ .ink0 }}; border: 1px solid {{ .ink2 }}; }
+main .markdown pre, main .markdown .highlight pre { font-size: .8rem; background: {{ .ink0 }}; border: 1px solid {{ .ink2 }}; border-left: 2px solid {{ .gold }}; }
+main .markdown pre code { border: 0; background: none; }
+main .markdown table th, main .markdown table td { border-color: {{ .ink2 }}; }
+main .markdown table tr { background: none; border-color: {{ .ink2 }}; }
+
+/* Reactions and votes: quiet text, no pills. */
+main .gsc-social-reaction-summary-item { border-color: transparent; background: transparent; color: {{ .dim }}; }
+main .gsc-social-reaction-summary-item:hover { border-color: {{ .ink2 }}; background: transparent; }
+main .gsc-social-reaction-summary-item.has-reacted { border-color: {{ .gold }}; background: transparent; }
+main .gsc-social-reaction-summary-item-count { color: {{ .dim }}; }
+main .gsc-reactions-button svg, main .gsc-upvote-button svg { fill: {{ .dim }}; }
+main .gsc-reactions-popover { background: {{ .ink1 }}; border-color: {{ .ink2 }}; }
+main .gsc-comment-replies-count, main .gsc-comment-replies-count span { color: {{ .dim }}; font-size: .95rem; }
+
+/* Replies sit inside the comment, set off by a rule. */
+main .gsc-replies { border-top: 1px solid {{ .ink2 }}; background: transparent; padding-left: 1.25rem; }
+main .gsc-tl-line { background: {{ .ink2 }}; }
+main .gsc-reply-box { background: transparent; border-top-color: {{ .ink2 }}; }
+main .gsc-reply-box .form-control { background: {{ .ink0 }}; border-color: {{ .ink2 }}; font-style: italic; color: {{ .dim }}; }
+
+main .gsc-pagination-button { color: {{ .rubric }}; background: none; border-color: {{ .ink2 }}; }
 
 /* Loading states without GitHub's grey mascots. */
 main .pagination-loader-container { background-image: none; }

@@ -93,7 +93,7 @@ if (mount) {
     mapping: mount.dataset.mapping,
     ...(mount.dataset.term ? { term: mount.dataset.term } : {}),
     strict: '1',
-    'reactions-enabled': '1',
+    'reactions-enabled': mount.dataset.reactions || '1',
     'emit-metadata': '0',
     'input-position': 'top',
     theme: giscusTheme(mount),

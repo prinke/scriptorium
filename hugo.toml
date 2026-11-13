@@ -30,6 +30,7 @@
     category = ''
     categoryId = ''
     mapping = 'pathname'
+    reactions = true   # the emoji reaction bar above the thread
 
 # Note: Hugo does not read [markup] from a theme. Copy this into the site's hugo.toml:
 # [markup]

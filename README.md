@@ -129,6 +129,7 @@ for sections that don't have many links.
   category = 'Comments'
   categoryId = 'DIC_…'
   mapping = 'pathname'
+  reactions = true      # false hides the emoji bar above the thread
 ```
 
 Get the values from [giscus.app](https://giscus.app). Comments appear on posts once `repo`,
