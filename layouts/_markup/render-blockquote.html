@@ -1,0 +1,19 @@
+{{- /* GitHub-style alerts become Latin-labelled callouts:
+  > [!NB] or [!NOTE] / [!IMPORTANT]   → Nota Bene
+  > [!CAVEAT] or [!WARNING] / [!CAUTION] → Caveat
+  > [!ERGO] or [!TIP] / [!SUMMARY]     → Ergo
+  A custom title after the marker replaces the label: > [!NB] Grammar note
+*/ -}}
+{{- if eq .Type "alert" -}}
+  {{- $kinds := dict "nb" "nb" "note" "nb" "important" "nb" "caveat" "caveat" "warning" "caveat" "caution" "caveat" "ergo" "ergo" "tip" "ergo" "summary" "ergo" -}}
+  {{- $labels := dict "nb" (T "calloutNote") "caveat" (T "calloutCaveat") "ergo" (T "calloutErgo") -}}
+  {{- $kind := index $kinds (lower .AlertType) | default "nb" -}}
+<aside class="callout callout-{{ $kind }}">
+  <p class="callout-label">{{ with .AlertTitle }}{{ . }}{{ else }}{{ index $labels $kind }}{{ end }}</p>
+  {{ .Text }}
+</aside>
+{{- else -}}
+<blockquote{{ range $k, $v := .Attributes }} {{ $k }}="{{ $v }}"{{ end }}>
+  {{ .Text }}
+</blockquote>
+{{- end -}}

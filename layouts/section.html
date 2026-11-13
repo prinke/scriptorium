@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{- $topic := partial "topic.html" . }}
+<header class="list-head">
+  {{- with $topic.glyph }}
+  <span class="glyph{{ if $topic.mono }} glyph-mono{{ end }}" aria-hidden="true">{{ . }}</span>
+  {{- end }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="intro">{{ . }}</div>
+  {{- end }}
+</header>
+<div class="list-body">
+  {{- $pager := .Paginate .Pages.ByDate.Reverse }}
+  {{- with $pager.Pages }}
+  <ol class="entries" reversed>
+    {{- range . }}{{ partial "entry.html" . }}{{ end }}
+  </ol>
+  {{- else }}
+  <p class="entries-empty">{{ T "sectionEmpty" }}</p>
+  {{- end }}
+  {{ partial "pagination.html" $pager }}
+</div>
+{{ end }}

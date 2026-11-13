@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s · %s" .Title site.Title }}{{ end }}</title>
+{{- $desc := or .Description .Params.dek site.Params.description }}
+{{- with $desc }}
+<meta name="description" content="{{ . | plainify }}">
+{{- end }}
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#14110F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2EADA" media="(prefers-color-scheme: light)">
+{{- /* Apply a saved theme choice before first paint so the page never flashes. */}}
+<script>document.documentElement.classList.add("js");(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
+{{- range slice "eb-garamond-latin-400-normal" "cormorant-garamond-latin-600-normal" "unifrakturmaguntia-latin-400-normal" }}
+<link rel="preload" href="{{ printf "fonts/%s.woff2" . | relURL }}" as="font" type="font/woff2" crossorigin>
+{{- end }}
+{{ partialCached "head/fonts.html" . }}
+{{ partialCached "head/css.html" . }}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+{{- with site.Home.OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ partial "opengraph.html" . }}
+{{- /* Labels drawn by CSS, so they can be translated too. */}}
+<style>:root{--label-figure:"{{ T "figureLabel" }} ";--label-notes:"{{ T "notesHeading" }}"}</style>
+{{- with resources.Get "css/custom.css" }}
+  {{- with . | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{- end }}
+{{- end }}
+{{ partial "hooks/head-end.html" . }}

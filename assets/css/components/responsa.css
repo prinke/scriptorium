@@ -1,0 +1,5 @@
+/* Comments (Giscus). The frame itself is themed by static/giscus/*.css. */
+.responsa { margin-top: var(--space-7); }
+.responsa-note { margin: 0 0 var(--space-4); color: var(--parchment-dim); font-size: .92em; font-style: italic; }
+.giscus-mount { min-height: 6rem; }
+.giscus-mount .giscus-frame { width: 100%; border: 0; color-scheme: normal; }

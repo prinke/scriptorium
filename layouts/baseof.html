@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+{{- $topic := partial "topic.html" . }}
+<body class="kind-{{ .Kind }}{{ with .Section }} topic-{{ . }}{{ end }}" style="{{ $topic.style }}; --art: var(--art-{{ $topic.art }})">
+  <a class="skip-link" href="#main">{{ T "skipToContent" }}</a>
+  {{- if and (ne site.Params.marginArt false) (ne $topic.art "none") }}
+  <div class="margin-art left" aria-hidden="true"></div>
+  <div class="margin-art right" aria-hidden="true"></div>
+  {{- end }}
+  <div class="page">
+    {{ partial "header.html" . }}
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+  {{ partialCached "head/js.html" . }}
+  {{ partial "scripttagger.html" . }}
+  {{ partial "hooks/body-end.html" . }}
+</body>
+</html>

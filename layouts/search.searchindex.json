@@ -1,0 +1,24 @@
+{{- /* Search index: every post in the post sections, newest first. Served at /search/index.json. */ -}}
+{{- $items := slice -}}
+{{- range (partialCached "posts.html" "posts").ByDate.Reverse -}}
+  {{- $pos := partialCached "post-position.html" . .RelPermalink -}}
+  {{- $topic := partial "topic.html" . -}}
+  {{- $tags := slice -}}
+  {{- range .GetTerms "tags" }}{{ $tags = $tags | append .LinkTitle }}{{ end -}}
+  {{- $items = $items | append (dict
+      "title" .Title
+      "url" .RelPermalink
+      "section" .Section
+      "label" $topic.label
+      "glyph" $topic.glyph
+      "mono" $topic.mono
+      "accent" $topic.accent
+      "no" (partial "roman.html" $pos.number)
+      "date" (.Date.Format "2006-01-02")
+      "dateHuman" (.Date | time.Format "2 Jan 2006")
+      "dek" (.Params.dek | default "" | plainify | htmlUnescape)
+      "tags" $tags
+      "body" (partial "search-text.html" .)
+  ) -}}
+{{- end -}}
+{{- $items | jsonify -}}

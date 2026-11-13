@@ -1,0 +1,24 @@
+{{- /* Blue Letter Bible ScriptTagger: turns references like "John 3:16" into links with a verse
+   pop-up. Configure under [params.scriptTagger]; a post can opt out with `scripttagger = false`.
+   It only loads on posts, and only tags the post body (.prose): every other part of the page
+   is listed in NoSearchClassNames, since the tagger has no "only search here" option. */ -}}
+{{- $isPost := and .IsPage (in site.Params.postSections .Section) }}
+{{- $outside := "noTag doNotTag skip-link masthead colophon leaf-head leaf-epigraph leaf-toc finis tags catchwords further responsa codeblock" }}
+{{- with site.Params.scriptTagger }}{{ if and .enable $isPost (ne $.Params.scripttagger false) }}
+<script src="https://www.blueletterbible.org/assets/scripts/blbToolTip/BLB_ScriptTagger-min.js"></script>
+<script>
+(function () {
+  if (!window.BLB || !BLB.Tagger) return;
+  var t = document.documentElement.getAttribute("data-theme");
+  var dark = t ? t === "dark" : !window.matchMedia("(prefers-color-scheme: light)").matches;
+  BLB.Tagger.Translation = {{ .translation | default "ESV" }};
+  BLB.Tagger.HyperLinks = {{ .hyperLinks | default "hover" }};
+  BLB.Tagger.HideTranslationAbbrev = {{ .hideTranslationAbbrev | default false }};
+  BLB.Tagger.TargetNewWindow = {{ .targetNewWindow | default true }};
+  BLB.Tagger.DarkTheme = dark;
+  BLB.Tagger.Style = {{ .style | default "par" }};
+  BLB.Tagger.NoSearchTagNames = {{ .noSearchTagNames | default "h1 h2 h3 h4 pre code nav" }};
+  BLB.Tagger.NoSearchClassNames = {{ trim (printf "%s %s" $outside (.noSearchClassNames | default "")) " " }};
+})();
+</script>
+{{- end }}{{ end }}

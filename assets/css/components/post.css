@@ -1,0 +1,316 @@
+/* ── The leaf: one reading column, with a right margin for notes on wide screens ── */
+.leaf {
+  position: relative;
+  max-width: var(--measure);
+  margin: var(--space-7) auto 0;
+}
+@media (min-width: 1100px) {
+  .leaf.has-margin {
+    margin-left: max(0px, calc((100% - var(--measure) - var(--margin-col) - var(--margin-gap)) / 2));
+  }
+}
+
+.kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: 0;
+  color: var(--accent);
+  font-variant-caps: all-small-caps;
+  letter-spacing: .1em;
+  font-size: 1.05em;
+}
+.kicker a { color: inherit; text-decoration: none; }
+.kicker a:hover { text-decoration: underline; }
+.kicker .no { color: var(--parchment-dim); }
+
+.leaf-head h1 {
+  font-size: var(--step-4);
+  line-height: 1.1;
+  margin: var(--space-2) 0 var(--space-3);
+}
+.dek {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--step-1);
+  line-height: 1.3;
+  color: var(--parchment-dim);
+  margin: 0;
+  text-wrap: balance;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin: var(--space-4) 0 0;
+  color: var(--parchment-dim);
+  font-variant-caps: all-small-caps;
+  letter-spacing: .06em;
+}
+.meta > * + *::before { content: "·"; margin-right: var(--space-3); color: var(--gold); }
+.leaf-head {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--ink-2);
+  margin-bottom: var(--space-6);
+}
+
+/* table of contents for long posts */
+.leaf-toc {
+  margin: 0 0 var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+  background: var(--ink-1);
+}
+.leaf-toc summary {
+  cursor: pointer;
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+  color: var(--gold);
+}
+.leaf-toc ul { list-style: none; margin: var(--space-2) 0 0; padding-left: 0; }
+.leaf-toc ul ul { padding-left: var(--space-5); margin: 0; }
+.leaf-toc li { margin: var(--space-1) 0; }
+.leaf-toc a { color: var(--parchment); text-decoration: none; }
+.leaf-toc a:hover { color: var(--accent); }
+
+/* ── Prose ─────────────────────────────────────────── */
+.prose > * { margin-top: 0; }
+.prose p,
+.prose ul,
+.prose ol,
+.prose dl { margin: 0 0 var(--space-4); }
+.prose p { hyphens: auto; text-wrap: pretty; }
+.prose li + li { margin-top: var(--space-1); }
+.prose li::marker { color: var(--gold); }
+.prose h2 { font-size: var(--step-3); margin: var(--space-7) 0 var(--space-4); }
+.prose h3 { font-size: var(--step-2); margin: var(--space-6) 0 var(--space-3); }
+.prose h4 { font-size: var(--step-1); margin: var(--space-5) 0 var(--space-2); }
+.prose strong { font-weight: 500; }
+
+/* Front matter `numbered: true` gives h2s Roman numerals. */
+.prose.numbered h2::before {
+  counter-increment: h2;
+  content: counter(h2, upper-roman) ".";
+  color: var(--accent);
+  margin-right: .35em;
+}
+
+/* heading anchors */
+.prose .anchor {
+  margin-left: .3em;
+  font-size: .6em;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity .15s ease;
+  vertical-align: middle;
+}
+.prose :is(h2, h3, h4):hover .anchor,
+.prose .anchor:focus-visible { opacity: 1; }
+
+/* drop cap and rubricated first line */
+.prose.has-dropcap > p:first-child::first-letter {
+  float: left;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 4.3em;
+  line-height: .78;
+  padding: .07em .1em 0 0;
+  color: var(--gold);
+}
+.prose.has-dropcap > p:first-child::first-line {
+  font-variant-caps: all-small-caps;
+  letter-spacing: .05em;
+  color: var(--accent);
+}
+
+/* section break: Markdown --- becomes a fleuron */
+.prose > hr {
+  border: 0;
+  height: auto;
+  margin: var(--space-7) 0;
+  text-align: center;
+  overflow: visible;
+}
+.prose > hr::after { content: "❦"; color: var(--gold); font-size: 1.4rem; }
+
+.prose blockquote {
+  margin: var(--space-5) 0;
+  padding: 0 0 0 var(--space-5);
+  border-left: 1px solid var(--gold);
+  font-style: italic;
+}
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose blockquote cite { display: block; margin-top: var(--space-2); font-style: normal; color: var(--parchment-dim); font-variant-caps: all-small-caps; letter-spacing: .06em; }
+
+.prose img { display: block; max-width: 100%; height: auto; margin: var(--space-5) auto; }
+
+/* Figures: image plates, numbered I, II, III… (also styles Hugo's built-in figure shortcode) */
+.prose { counter-reset: sidenote h2 plate; }
+.prose figure:not(.scripture, .codeblock) {
+  margin: var(--space-7) 0;
+  counter-increment: plate;
+}
+.prose figure:not(.scripture, .codeblock) img {
+  margin: 0 auto;
+  width: auto;
+  max-height: 85vh;
+  padding: var(--space-2);
+  background: var(--ink-1);
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+}
+.prose figure:not(.scripture, .codeblock) figcaption {
+  max-width: 52ch;
+  margin: var(--space-3) auto 0;
+  text-align: center;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--parchment-dim);
+  text-wrap: balance;
+}
+.prose figure:not(.scripture, .codeblock) figcaption::before {
+  content: var(--label-figure, "Plate ") counter(plate, upper-roman) ". ";
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+  color: var(--gold);
+}
+.prose figcaption p, .prose figcaption h4 { display: inline; margin: 0; font: inherit; }
+.prose figcaption a { color: inherit; }
+
+/* Definition lists, task lists, strikethrough */
+.prose dt {
+  font-variant-caps: all-small-caps;
+  letter-spacing: .06em;
+  font-weight: 500;
+  color: var(--accent);
+}
+.prose dd { margin: 0 0 var(--space-3) var(--space-5); }
+.prose li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.2em; }
+.prose input[type="checkbox"] { accent-color: var(--accent); margin: 0 .5em 0 0; vertical-align: middle; }
+.prose del { color: var(--parchment-dim); }
+
+/* Epigraph at the head of a post (front matter `epigraph`) */
+.leaf-epigraph {
+  margin: 0 0 var(--space-6) auto;
+  max-width: 34ch;
+  text-align: right;
+}
+.leaf-epigraph blockquote {
+  margin: 0;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--step-1);
+  line-height: 1.3;
+}
+.leaf-epigraph blockquote p { margin: 0; }
+.leaf-epigraph figcaption {
+  margin-top: var(--space-2);
+  color: var(--parchment-dim);
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+}
+.leaf-epigraph figcaption::before { content: "— "; }
+
+.prose .table-wrap,
+.prose table { margin: var(--space-5) 0; }
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: .92em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.prose th, .prose td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--ink-2); text-align: left; vertical-align: top; }
+.prose th { font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: .06em; color: var(--gold); border-bottom-color: var(--gold); }
+
+/* footnotes (Goldmark) */
+.prose sup[id^="fnref"] a,
+.prose .footnote-ref {
+  font-family: var(--f-display);
+  font-weight: 600;
+  text-decoration: none;
+  font-variant-numeric: lining-nums;
+  padding-inline: .1em;
+}
+.footnotes {
+  margin-top: var(--space-7);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--parchment-dim);
+}
+.footnotes::before {
+  content: var(--label-notes, "Notes");
+  display: block;
+  margin-bottom: var(--space-3);
+  font-variant-caps: all-small-caps;
+  letter-spacing: .1em;
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: var(--space-5); margin: 0; }
+.footnotes li::marker { font-variant-numeric: lining-nums; }
+.footnotes .footnote-backref { text-decoration: none; margin-left: .2em; }
+
+/* ── After the text ─────────────────────────────────── */
+.finis { text-align: center; color: var(--gold); font-size: 1.3rem; margin: var(--space-6) 0 0; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tags a {
+  display: inline-block;
+  padding: 0 .6rem;
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+  color: var(--parchment-dim);
+  text-decoration: none;
+  font-variant-caps: all-small-caps;
+  letter-spacing: .06em;
+}
+.tags a:hover { color: var(--accent); border-color: var(--accent); }
+
+.catchwords {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--ink-2);
+}
+.catchwords a { display: block; text-decoration: none; color: var(--parchment); min-width: 0; }
+.catchwords small {
+  display: block;
+  color: var(--parchment-dim);
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+  font-size: .85em;
+}
+.catchwords .cw-title {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.2em;
+  line-height: 1.25;
+}
+.catchwords a:hover .cw-title { color: var(--accent); }
+.catchwords .newer { grid-column: 2; text-align: right; }
+
+.further { margin-top: var(--space-7); }
+.further h2, .responsa h2 { font-size: var(--step-2); margin: 0 0 var(--space-3); }
+
+@media (max-width: 560px) {
+  .catchwords { grid-template-columns: 1fr; }
+  .catchwords .newer { grid-column: auto; text-align: left; }
+}

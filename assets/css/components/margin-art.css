@@ -1,0 +1,49 @@
+/* ── Margin art ────────────────────────────────────────────────
+   A line drawing repeats down each side margin on wide screens, where the
+   margins are otherwise empty. Four motifs: rose (rose windows), tracery
+   (Gothic windows), circuit (schematic traces) and vine (a vine scroll).
+   Which one a page uses comes from params.topics.<section>.art, params.homeArt
+   and params.defaultArt; the template sets --art on <body>. The drawings are
+   CSS masks filled with --gold, so they follow the theme. The right column is
+   mirrored. Turn it all off with params.marginArt = false. */
+.margin-art { display: none; }
+
+:root {
+  --art-tracery: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 380' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E %3Cpath d='M0 3H120M0 7H120'/%3E %3Cpath d='M10 372V130A100 100 0 0 1 60 43.4A100 100 0 0 1 110 130V372'/%3E %3Cpath d='M15 372V131A95 95 0 0 1 60 49A95 95 0 0 1 105 131V372' opacity='.5'/%3E %3Cpath d='M60 372V178'/%3E %3Cpath d='M20 372V178A40 40 0 0 1 40 143.4A40 40 0 0 1 60 178'/%3E %3Cpath d='M60 178A40 40 0 0 1 80 143.4A40 40 0 0 1 100 178V372'/%3E %3Cpath d='M27 372V184A30 30 0 0 1 40 158A30 30 0 0 1 53 184V372' opacity='.5'/%3E %3Cpath d='M67 372V184A30 30 0 0 1 80 158A30 30 0 0 1 93 184V372' opacity='.5'/%3E %3Ccircle cx='60' cy='104' r='22'/%3E %3Ccircle cx='60' cy='94.5' r='9.5'/%3E%3Ccircle cx='69.5' cy='104' r='9.5'/%3E%3Ccircle cx='60' cy='113.5' r='9.5'/%3E%3Ccircle cx='50.5' cy='104' r='9.5'/%3E %3Ccircle cx='60' cy='104' r='2.2'/%3E %3Cpath d='M0 376H120M0 380H120'/%3E%3C/svg%3E");
+  --art-rose: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 220' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='60' cy='110' r='54'/%3E%3Ccircle cx='60' cy='110' r='50'/%3E%3Ccircle cx='60' cy='110' r='12'/%3E%3Ccircle cx='60' cy='110' r='4'/%3E%3Cpath d='M60.0 98.0L60.0 60.0'/%3E%3Ccircle cx='74.5' cy='74.9' r='7'/%3E%3Ccircle cx='68.4' cy='89.7' r='3.5' opacity='.6'/%3E%3Cpath d='M68.5 101.5L95.4 74.6'/%3E%3Ccircle cx='95.1' cy='95.5' r='7'/%3E%3Ccircle cx='80.3' cy='101.6' r='3.5' opacity='.6'/%3E%3Cpath d='M72.0 110.0L110.0 110.0'/%3E%3Ccircle cx='95.1' cy='124.5' r='7'/%3E%3Ccircle cx='80.3' cy='118.4' r='3.5' opacity='.6'/%3E%3Cpath d='M68.5 118.5L95.4 145.4'/%3E%3Ccircle cx='74.5' cy='145.1' r='7'/%3E%3Ccircle cx='68.4' cy='130.3' r='3.5' opacity='.6'/%3E%3Cpath d='M60.0 122.0L60.0 160.0'/%3E%3Ccircle cx='45.5' cy='145.1' r='7'/%3E%3Ccircle cx='51.6' cy='130.3' r='3.5' opacity='.6'/%3E%3Cpath d='M51.5 118.5L24.6 145.4'/%3E%3Ccircle cx='24.9' cy='124.5' r='7'/%3E%3Ccircle cx='39.7' cy='118.4' r='3.5' opacity='.6'/%3E%3Cpath d='M48.0 110.0L10.0 110.0'/%3E%3Ccircle cx='24.9' cy='95.5' r='7'/%3E%3Ccircle cx='39.7' cy='101.6' r='3.5' opacity='.6'/%3E%3Cpath d='M51.5 101.5L24.6 74.6'/%3E%3Ccircle cx='45.5' cy='74.9' r='7'/%3E%3Ccircle cx='51.6' cy='89.7' r='3.5' opacity='.6'/%3E%3Cpath d='M60 0V56M60 164V220' opacity='.5'/%3E%3Ccircle cx='60' cy='186' r='5'/%3E%3Ccircle cx='60' cy='198' r='5'/%3E%3Ccircle cx='54' cy='192' r='5'/%3E%3Ccircle cx='66' cy='192' r='5'/%3E%3C/svg%3E");
+  --art-circuit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 320' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E %3Cpath d='M30 0V70L45 85V150L30 165V320'/%3E %3Cpath d='M60 0V104M60 116V180L75 195V245L60 260V320'/%3E %3Ccircle cx='60' cy='110' r='6'/%3E%3Ccircle cx='60' cy='110' r='2'/%3E %3Cpath d='M90 0V50L105 65V120L90 135V320'/%3E %3Cpath d='M45 120H18'/%3E%3Ccircle cx='13' cy='120' r='5'/%3E %3Cpath d='M105 95H112'/%3E%3Ccircle cx='112' cy='95' r='2.5'/%3E %3Cpath d='M75 220H104'/%3E%3Ccircle cx='109' cy='220' r='5'/%3E%3Ccircle cx='109' cy='220' r='1.8'/%3E %3Cpath d='M30 40H14'/%3E%3Ccircle cx='10' cy='40' r='3'/%3E %3Crect x='38' y='272' width='44' height='30' rx='2'/%3E %3Cpath d='M44 272v-5M52 272v-5M68 272v-5M76 272v-5M44 302v5M52 302v5M68 302v5M76 302v5'/%3E %3Ccircle cx='44' cy='278' r='1.6'/%3E %3Cpath d='M30 205H12V250' opacity='.6'/%3E%3Ccircle cx='12' cy='254' r='3' opacity='.6'/%3E %3Cpath d='M90 160H110' opacity='.6'/%3E%3Ccircle cx='113' cy='160' r='3' opacity='.6'/%3E%3C/svg%3E");
+  --art-vine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 320' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 0C100 40 100 120 60 160S20 280 60 320'/%3E%3Cpath d='M62 0C102 40 102 120 62 160S22 280 62 320' opacity='.4'/%3E%3Cpath d='M89 62C104 52 112 34 100 27C91 22 84 32 91 37C95 40 99 35 96 32'/%3E%3Cpath d='M31 222C16 212 8 194 20 187C29 182 36 192 29 197C25 200 21 195 24 192'/%3E%3Cpath d='M88 118C100 118 108 126 110 136'/%3E%3Cpath d='M32 278C20 278 12 270 10 260'/%3E%3Cpath d='M88.0 118.0C84.4 130.9 93.2 136.1 104.4 132.7C106.6 121.3 100.5 113.1 88.0 118.0Z'/%3E%3Cpath d='M88.0 118.0L100.6 129.4' opacity='.6'/%3E%3Cpath d='M110.0 136.0C102.6 141.8 105.3 148.4 113.0 151.1C119.1 145.6 119.1 138.5 110.0 136.0Z'/%3E%3Cpath d='M110.0 136.0L112.3 147.7' opacity='.6'/%3E%3Cpath d='M80.0 40.0C79.1 29.3 71.1 27.8 63.7 33.5C65.1 42.7 72.0 47.1 80.0 40.0Z'/%3E%3Cpath d='M80.0 40.0L67.4 34.9' opacity='.6'/%3E%3Cpath d='M32.0 278.0C35.6 265.1 26.8 259.9 15.6 263.3C13.4 274.7 19.5 282.9 32.0 278.0Z'/%3E%3Cpath d='M32.0 278.0L19.4 266.6' opacity='.6'/%3E%3Cpath d='M10.0 260.0C17.4 254.2 14.7 247.6 7.0 244.9C0.9 250.4 0.9 257.5 10.0 260.0Z'/%3E%3Cpath d='M10.0 260.0L7.7 248.3' opacity='.6'/%3E%3Cpath d='M40.0 200.0C40.9 210.7 48.9 212.2 56.3 206.5C54.9 197.3 48.0 192.9 40.0 200.0Z'/%3E%3Cpath d='M40.0 200.0L52.6 205.1' opacity='.6'/%3E%3Cpath d='M70.0 155.0C64.5 149.1 59.1 152.0 57.4 158.8C62.5 163.5 68.6 162.9 70.0 155.0Z'/%3E%3Cpath d='M70.0 155.0L60.2 157.9' opacity='.6'/%3E%3Ccircle cx='104' cy='92' r='2.6'/%3E%3Ccircle cx='109' cy='88' r='2.6'/%3E%3Ccircle cx='103' cy='85' r='2.6'/%3E%3Ccircle cx='16' cy='300' r='2.6'/%3E%3Ccircle cx='11' cy='296' r='2.6'/%3E%3Ccircle cx='17' cy='293' r='2.6'/%3E%3C/svg%3E");
+}
+
+@media (min-width: 1440px) {
+  body { position: relative; }
+
+  .margin-art {
+    --gutter: calc((100vw - 1180px) / 2);
+    --art-w: clamp(70px, calc(var(--gutter) - 70px), 150px);
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--art-w);
+    left: calc((var(--gutter) - var(--art-w)) / 2);
+    z-index: 0;
+    pointer-events: none;
+    opacity: var(--art-opacity);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12rem, #000 calc(100% - 16rem), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 12rem, #000 calc(100% - 16rem), transparent 100%);
+  }
+  .margin-art.right {
+    left: auto;
+    right: calc((var(--gutter) - var(--art-w)) / 2);
+    transform: scaleX(-1);
+  }
+  .margin-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    -webkit-mask: var(--art) top center / 100% auto repeat-y;
+    mask: var(--art) top center / 100% auto repeat-y;
+  }
+}

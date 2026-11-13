@@ -1,0 +1,6 @@
+{{- /* Site title with the word in params.wordmarkLight picked out in gold. */ -}}
+{{- $title := site.Title | htmlEscape -}}
+{{- with site.Params.wordmarkLight -}}
+  {{- $title = replace $title (htmlEscape .) (printf `<span class="lux">%s</span>` (htmlEscape .)) 1 -}}
+{{- end -}}
+{{- return ($title | safeHTML) -}}

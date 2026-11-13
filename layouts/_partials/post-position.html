@@ -1,0 +1,12 @@
+{{- /* For a post, returns its chronological number and its older/newer neighbours. */ -}}
+{{- $list := (partialCached "posts.html" "posts").ByDate -}}
+{{- $result := dict "number" 0 "older" false "newer" false -}}
+{{- range $i, $p := $list -}}
+  {{- if eq $p $ -}}
+    {{- $result = merge $result (dict "number" (add $i 1)) -}}
+    {{- if gt $i 0 }}{{ $result = merge $result (dict "older" (index $list (sub $i 1))) }}{{ end -}}
+    {{- if lt (add $i 1) (len $list) }}{{ $result = merge $result (dict "newer" (index $list (add $i 1))) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $.Params.number }}{{ $result = merge $result (dict "number" .) }}{{ end -}}
+{{- return $result -}}

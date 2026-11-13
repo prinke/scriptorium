@@ -1,0 +1,61 @@
+# Every piece of text the theme prints. To change a label, copy this file to your
+# site's i18n/en.toml and edit the ones you want; to translate, add i18n/<lang>.toml.
+
+skipToContent = "Skip to content"
+mainMenu = "Main"
+menu = "Menu"
+closeMenu = "Close menu"
+search = "Search"
+searchShortcut = "Search (press /)"
+switchTheme = "Switch between dark and light theme"
+rss = "RSS"
+
+contents = "Contents"
+noPosts = "No leaves have been written yet."
+sectionEmpty = "Nothing here yet."
+indexEmpty = "The index is empty."
+catalogueEmpty = "The catalogue is empty."
+
+postNumber = "No."
+minRead = "{{ .Count }} min read"
+revised = "Revised"
+tags = "Tags"
+neighbours = "Neighbouring posts"
+previousPost = "← Previous leaf"
+nextPost = "Next leaf →"
+furtherReading = "Further reading"
+linkToSection = "Link to this section"
+
+backTo = "Back to the {{ .Section }}"
+
+
+pages = "Pages"
+newerPage = "← Later leaves"
+olderPage = "Earlier leaves →"
+pageOf = "Folio {{ .Page }} of {{ .Total }}"
+
+notFoundTitle = "Lacuna"
+notFoundText = "This leaf is missing from the codex. It may have been moved, renamed, or never written."
+notFoundHome = "Return to the contents"
+
+comments = "Responsa"
+commentsNote = "Replies are kept in GitHub Discussions. Sign in with GitHub to add one."
+commentsNoScript = "Replies need JavaScript, or read them on GitHub Discussions."
+
+searchLabel = "Search this site"
+searchPlaceholder = "Search {{ .Site }}…"
+searchButton = "Search"
+searchResultOne = "1 leaf found for “{{ .Query }}”."
+searchResultMany = "{{ .Count }} leaves found for “{{ .Query }}”."
+searchNoResults = "Nothing here matches “{{ .Query }}”."
+searchError = "The search index could not be loaded. Try reloading the page."
+
+calloutNote = "Nota Bene"
+calloutCaveat = "Caveat"
+calloutErgo = "Ergo"
+figureLabel = "Plate"
+notesHeading = "Notes"
+
+[termCount]
+one = "{{ .Count }} leaf"
+other = "{{ .Count }} leaves"

@@ -1,0 +1,85 @@
+{{ define "main" }}
+{{- $isPost := in site.Params.postSections .Section }}
+{{- $pos := dict }}
+{{- if $isPost }}{{ $pos = partialCached "post-position.html" . .RelPermalink }}{{ end }}
+<article class="leaf{{ if $isPost }} post{{ end }}{{ if .HasShortcode "sidenote" }} has-margin{{ end }}">
+  <header class="leaf-head">
+    {{- if $isPost }}
+    {{- $topic := partial "topic.html" . }}
+    <p class="kicker">
+      {{ partial "glyph.html" . }}
+      <a href="{{ .CurrentSection.RelPermalink }}">{{ $topic.label }}</a>
+      <span class="no">· {{ T "postNumber" }} {{ partial "roman.html" $pos.number }}</span>
+    </p>
+    {{- end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.dek }}
+    <p class="dek">{{ . | markdownify }}</p>
+    {{- end }}
+    {{- if $isPost }}
+    <p class="meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2 January 2006" }}</time>
+      <span>{{ T "minRead" (dict "Count" .ReadingTime) }}</span>
+      {{- if gt (.Lastmod.Sub .Date).Hours 48 }}
+      <span>{{ T "revised" }} <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod | time.Format "2 Jan 2006" }}</time></span>
+      {{- end }}
+    </p>
+    {{- end }}
+  </header>
+
+  {{- with .Params.epigraph }}
+  <figure class="leaf-epigraph">
+    <blockquote><p>{{ .text | markdownify }}</p></blockquote>
+    {{- with .source }}
+    <figcaption>{{ . | markdownify }}</figcaption>
+    {{- end }}
+  </figure>
+  {{- end }}
+
+  {{- if and .Params.toc (gt (len .Fragments.Headings) 0) }}
+  <details class="leaf-toc">
+    <summary>{{ T "contents" }}</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{- end }}
+
+  <div class="prose{{ if .Params.numbered }} numbered{{ end }}{{ if and $isPost (ne .Params.dropcap false) }} has-dropcap{{ end }}">
+    {{ .Content }}
+  </div>
+
+  {{- if $isPost }}
+  <p class="finis" aria-hidden="true">⁂</p>
+
+  {{- with .GetTerms "tags" }}
+  <ul class="tags" aria-label="{{ T "tags" }}">
+    {{- range . }}
+    <li><a href="{{ .RelPermalink }}" rel="tag">{{ .LinkTitle }}</a></li>
+    {{- end }}
+  </ul>
+  {{- end }}
+
+  {{- if or $pos.older $pos.newer }}
+  <nav class="catchwords" aria-label="{{ T "neighbours" }}">
+    {{- with $pos.older }}
+    <a class="older" href="{{ .RelPermalink }}" rel="prev"><small>{{ T "previousPost" }}</small><span class="cw-title">{{ .LinkTitle }}</span></a>
+    {{- end }}
+    {{- with $pos.newer }}
+    <a class="newer" href="{{ .RelPermalink }}" rel="next"><small>{{ T "nextPost" }}</small><span class="cw-title">{{ .LinkTitle }}</span></a>
+    {{- end }}
+  </nav>
+  {{- end }}
+
+  {{- $related := where (site.RegularPages.Related .) "Section" "in" site.Params.postSections | first 3 }}
+  {{- with $related }}
+  <section class="further" aria-labelledby="further-h">
+    <h2 id="further-h">{{ T "furtherReading" }}</h2>
+    <ol class="entries">
+      {{- range . }}{{ partial "entry.html" . }}{{ end }}
+    </ol>
+  </section>
+  {{- end }}
+
+  {{- if ne .Params.comments false }}{{ partial "giscus.html" . }}{{ end }}
+  {{- end }}
+</article>
+{{ end }}

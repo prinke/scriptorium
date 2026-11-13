@@ -1,0 +1,21 @@
+{{- /* Giscus comments. The script is injected by main.js so it can match the reader's theme. */ -}}
+{{- with site.Params.giscus }}{{ if and .repo .repoId .categoryId }}
+{{- $dark := "noborder_dark" }}{{ $light := "noborder_light" }}
+{{- if not hugo.IsDevelopment }}
+  {{- $dark = "giscus/nocturne.css" | absURL }}{{ $light = "giscus/vellum.css" | absURL }}
+{{- end }}
+<section class="responsa" aria-labelledby="responsa-h">
+  <h2 id="responsa-h">{{ T "comments" }}</h2>
+  <p class="responsa-note">{{ T "commentsNote" }}</p>
+  <div class="giscus-mount"
+    data-repo="{{ .repo }}"
+    data-repo-id="{{ .repoId }}"
+    data-category="{{ .category }}"
+    data-category-id="{{ .categoryId }}"
+    data-mapping="{{ .mapping | default "pathname" }}"
+    data-theme-dark="{{ $dark }}"
+    data-theme-light="{{ $light }}"
+    data-lang="{{ .lang | default "en" }}"></div>
+  <noscript><p class="responsa-note">{{ T "commentsNoScript" }}</p></noscript>
+</section>
+{{- end }}{{ end }}

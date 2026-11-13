@@ -1,0 +1,12 @@
+<header class="masthead">
+  <div class="masthead-row">
+    <div class="brand">
+      <a class="wordmark{{ if eq site.Params.wordmarkFont "display" }} wordmark-display{{ end }}" href="{{ "/" | relURL }}" rel="home">{{ partial "wordmark.html" . }}</a>
+      {{- with site.Params.tagline }}
+      <p class="tagline">{{ . }}</p>
+      {{- end }}
+    </div>
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </div>
+  <div class="double-rule" aria-hidden="true"></div>
+</header>

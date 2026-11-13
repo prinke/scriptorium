@@ -1,0 +1,75 @@
+/* Giscus theme for Lux in Tenebris (Nocturne). Served from the site so giscus.app can load it. */
+main {
+  --color-prettylights-syntax-comment: #A8997E;
+  --color-prettylights-syntax-constant: #CC6F5C;
+  --color-prettylights-syntax-entity: #E6DCC6;
+  --color-prettylights-syntax-storage-modifier-import: #E6DCC6;
+  --color-prettylights-syntax-entity-tag: #7FA894;
+  --color-prettylights-syntax-keyword: #C2A066;
+  --color-prettylights-syntax-string: #7FA894;
+  --color-prettylights-syntax-variable: #CC6F5C;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #CC6F5C;
+  --color-prettylights-syntax-invalid-illegal-text: #F3EBDC;
+  --color-prettylights-syntax-invalid-illegal-bg: #CC6F5C;
+  --color-prettylights-syntax-markup-heading: #C2A066;
+  --color-prettylights-syntax-markup-italic: #E6DCC6;
+  --color-prettylights-syntax-markup-bold: #E6DCC6;
+  --color-prettylights-syntax-meta-diff-range: #C2A066;
+  --color-btn-text: #E6DCC6;
+  --color-btn-bg: #1C1815;
+  --color-btn-border: #28211C;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #28211C;
+  --color-btn-hover-border: #C2A066;
+  --color-btn-active-bg: #28211C;
+  --color-btn-active-border: #C2A066;
+  --color-btn-selected-bg: #28211C;
+  --color-btn-primary-text: #F3EBDC;
+  --color-btn-primary-bg: #7A2626;
+  --color-btn-primary-border: #7A2626;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #8E2F2F;
+  --color-btn-primary-hover-border: #8E2F2F;
+  --color-btn-primary-selected-bg: #6A2020;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: rgba(243,235,220,.6);
+  --color-btn-primary-disabled-bg: rgba(122,38,38,.6);
+  --color-btn-primary-disabled-border: rgba(122,38,38,.6);
+  --color-action-list-item-default-hover-bg: #1C1815;
+  --color-segmented-control-bg: #1C1815;
+  --color-segmented-control-button-bg: #14110F;
+  --color-segmented-control-button-selected-border: #28211C;
+  --color-fg-default: #E6DCC6;
+  --color-fg-muted: #A8997E;
+  --color-fg-subtle: #A8997E;
+  --color-canvas-default: #14110F;
+  --color-canvas-overlay: #1C1815;
+  --color-canvas-inset: #14110F;
+  --color-canvas-subtle: #1C1815;
+  --color-border-default: #28211C;
+  --color-border-muted: #28211C;
+  --color-neutral-muted: #28211C;
+  --color-accent-fg: #CC6F5C;
+  --color-accent-emphasis: #7A2626;
+  --color-accent-muted: #C2A066;
+  --color-accent-subtle: #1C1815;
+  --color-success-fg: #7FA894;
+  --color-attention-fg: #C2A066;
+  --color-attention-muted: #C2A066;
+  --color-attention-subtle: #1C1815;
+  --color-danger-fg: #CC6F5C;
+  --color-danger-muted: #CC6F5C;
+  --color-danger-subtle: #1C1815;
+  --color-primer-shadow-inset: none;
+  --color-scale-gray-7: #28211C;
+  --color-scale-blue-8: #1C1815;
+  --color-social-reaction-bg-hover: #28211C;
+  --color-social-reaction-bg-reacted-hover: #28211C;
+  font-family: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+  font-size: 17px;
+}
+main .pagination-loader-container { background-image: none; }
+main .gsc-loading-image { background-image: none; }
+main .gsc-comment-box-textarea, main .gsc-comment-box-preview { font-family: "EB Garamond", Georgia, serif; }

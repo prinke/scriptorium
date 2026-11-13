@@ -1,0 +1,13 @@
+<footer class="colophon">
+  <div class="double-rule" aria-hidden="true"></div>
+  <div class="mark{{ if eq site.Params.wordmarkFont "display" }} wordmark-display{{ end }}">{{ partial "wordmark.html" . }}</div>
+  {{- with site.Params.colophon }}
+  <p>{{ . | markdownify }}</p>
+  {{- end }}
+  <p>
+    {{- with site.Params.author }}{{ . }}<span class="sep" aria-hidden="true">·</span>{{ end -}}
+    {{- with site.Home.OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">{{ T "rss" }}</a><span class="sep" aria-hidden="true">·</span>{{ end -}}
+    <span class="year" aria-label="{{ now.Year }}">{{ partial "roman.html" now.Year }}</span>
+  </p>
+  {{- partial "hooks/footer-end.html" . }}
+</footer>

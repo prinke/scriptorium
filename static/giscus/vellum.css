@@ -1,0 +1,75 @@
+/* Giscus theme for Lux in Tenebris (Vellum). Served from the site so giscus.app can load it. */
+main {
+  --color-prettylights-syntax-comment: #65564A;
+  --color-prettylights-syntax-constant: #8B2E2E;
+  --color-prettylights-syntax-entity: #2A211B;
+  --color-prettylights-syntax-storage-modifier-import: #2A211B;
+  --color-prettylights-syntax-entity-tag: #3D6B57;
+  --color-prettylights-syntax-keyword: #8A6A2F;
+  --color-prettylights-syntax-string: #3D6B57;
+  --color-prettylights-syntax-variable: #8B2E2E;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #8B2E2E;
+  --color-prettylights-syntax-invalid-illegal-text: #F3EBDC;
+  --color-prettylights-syntax-invalid-illegal-bg: #8B2E2E;
+  --color-prettylights-syntax-markup-heading: #8A6A2F;
+  --color-prettylights-syntax-markup-italic: #2A211B;
+  --color-prettylights-syntax-markup-bold: #2A211B;
+  --color-prettylights-syntax-meta-diff-range: #8A6A2F;
+  --color-btn-text: #2A211B;
+  --color-btn-bg: #E9DFC9;
+  --color-btn-border: #D6C8AC;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #D6C8AC;
+  --color-btn-hover-border: #8A6A2F;
+  --color-btn-active-bg: #D6C8AC;
+  --color-btn-active-border: #8A6A2F;
+  --color-btn-selected-bg: #D6C8AC;
+  --color-btn-primary-text: #F3EBDC;
+  --color-btn-primary-bg: #7A2626;
+  --color-btn-primary-border: #7A2626;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #8E2F2F;
+  --color-btn-primary-hover-border: #8E2F2F;
+  --color-btn-primary-selected-bg: #6A2020;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: rgba(243,235,220,.6);
+  --color-btn-primary-disabled-bg: rgba(122,38,38,.6);
+  --color-btn-primary-disabled-border: rgba(122,38,38,.6);
+  --color-action-list-item-default-hover-bg: #E9DFC9;
+  --color-segmented-control-bg: #E9DFC9;
+  --color-segmented-control-button-bg: #F2EADA;
+  --color-segmented-control-button-selected-border: #D6C8AC;
+  --color-fg-default: #2A211B;
+  --color-fg-muted: #65564A;
+  --color-fg-subtle: #65564A;
+  --color-canvas-default: #F2EADA;
+  --color-canvas-overlay: #E9DFC9;
+  --color-canvas-inset: #F2EADA;
+  --color-canvas-subtle: #E9DFC9;
+  --color-border-default: #D6C8AC;
+  --color-border-muted: #D6C8AC;
+  --color-neutral-muted: #D6C8AC;
+  --color-accent-fg: #8B2E2E;
+  --color-accent-emphasis: #7A2626;
+  --color-accent-muted: #8A6A2F;
+  --color-accent-subtle: #E9DFC9;
+  --color-success-fg: #3D6B57;
+  --color-attention-fg: #8A6A2F;
+  --color-attention-muted: #8A6A2F;
+  --color-attention-subtle: #E9DFC9;
+  --color-danger-fg: #8B2E2E;
+  --color-danger-muted: #8B2E2E;
+  --color-danger-subtle: #E9DFC9;
+  --color-primer-shadow-inset: none;
+  --color-scale-gray-7: #D6C8AC;
+  --color-scale-blue-8: #E9DFC9;
+  --color-social-reaction-bg-hover: #D6C8AC;
+  --color-social-reaction-bg-reacted-hover: #D6C8AC;
+  font-family: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+  font-size: 17px;
+}
+main .pagination-loader-container { background-image: none; }
+main .gsc-loading-image { background-image: none; }
+main .gsc-comment-box-textarea, main .gsc-comment-box-preview { font-family: "EB Garamond", Georgia, serif; }

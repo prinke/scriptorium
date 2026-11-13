@@ -1,0 +1,5 @@
+{{- /* Margin note. Usage, inside a paragraph:
+  Some claim.{{< sidenote >}}The note, with *inline* Markdown.{{< /sidenote >}} More text.
+*/ -}}
+<span class="sn-ref" aria-hidden="true"></span><span class="sidenote" role="note">{{ .Inner | strings.TrimSpace | .Page.RenderString }}</span>
+{{- /**/ -}}

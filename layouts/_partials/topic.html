@@ -1,0 +1,19 @@
+{{- /* A page's topic settings, from params.topics.<section>:
+     label, glyph, monoglyph, accent (a color token) and art (a margin motif).
+   Unknown accent/art names fall back to the defaults so nothing unsafe reaches CSS. */ -}}
+{{- $t := index site.Params.topics .Section | default dict -}}
+{{- $accents := slice "rubric" "verdigris" "lapis" "gold" "oxblood" "parchment" -}}
+{{- $arts := slice "tracery" "rose" "circuit" "vine" "none" -}}
+{{- $accent := $t.accent | default "rubric" -}}
+{{- if not (in $accents $accent) }}{{ warnf "Unknown accent %q for section %q; use one of %v" $accent .Section $accents }}{{ $accent = "rubric" }}{{ end -}}
+{{- $art := $t.art | default (site.Params.defaultArt | default "tracery") -}}
+{{- if .IsHome }}{{ $art = site.Params.homeArt | default "rose" }}{{ end -}}
+{{- if not (in $arts $art) }}{{ warnf "Unknown margin art %q; use one of %v" $art $arts }}{{ $art = "tracery" }}{{ end -}}
+{{- return dict
+    "label" ($t.label | default (.Section | humanize))
+    "glyph" ($t.glyph | default "")
+    "mono" ($t.monoglyph | default false)
+    "accent" $accent
+    "art" $art
+    "style" (printf "--accent: var(--%s)" $accent | safeCSS)
+-}}

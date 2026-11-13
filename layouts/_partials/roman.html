@@ -1,0 +1,11 @@
+{{- /* Returns an integer as Roman numerals, e.g. 2026 → MMXXVI. Zero or less returns "". */ -}}
+{{- $n := int . -}}
+{{- $out := "" -}}
+{{- range slice (slice 1000 "M") (slice 900 "CM") (slice 500 "D") (slice 400 "CD") (slice 100 "C") (slice 90 "XC") (slice 50 "L") (slice 40 "XL") (slice 10 "X") (slice 9 "IX") (slice 5 "V") (slice 4 "IV") (slice 1 "I") -}}
+  {{- $v := index . 0 -}}
+  {{- if ge $n $v -}}
+    {{- $out = printf "%s%s" $out (strings.Repeat (div $n $v) (index . 1)) -}}
+    {{- $n = mod $n $v -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

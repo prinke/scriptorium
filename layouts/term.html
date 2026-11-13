@@ -1,0 +1,14 @@
+{{ define "main" }}
+<header class="list-head">
+  <span class="glyph" aria-hidden="true">§</span>
+  <h1>{{ .Title }}</h1>
+  <p class="intro">{{ T "termCount" (len .Pages) }} · <a href="{{ .Parent.RelPermalink }}">{{ T "backTo" (dict "Section" (.Parent.Title | lower)) }}</a></p>
+</header>
+<div class="list-body">
+  {{- $pager := .Paginate .Pages.ByDate.Reverse }}
+  <ol class="entries" reversed>
+    {{- range $pager.Pages }}{{ partial "entry.html" . }}{{ end }}
+  </ol>
+  {{ partial "pagination.html" $pager }}
+</div>
+{{ end }}

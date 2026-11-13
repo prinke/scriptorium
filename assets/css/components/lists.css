@@ -1,0 +1,57 @@
+/* ── Section, taxonomy, catalogue and error pages ──── */
+.list-head {
+  max-width: var(--measure);
+  margin: var(--space-7) auto var(--space-6);
+  text-align: center;
+}
+.list-head .glyph { display: block; color: var(--accent); font-size: 1.6rem; line-height: 1; margin-bottom: var(--space-3); }
+.list-head h1 { font-size: var(--step-4); margin: 0; }
+.list-head .intro { margin: var(--space-3) auto 0; color: var(--parchment-dim); font-style: italic; }
+.list-head .intro p { margin: 0 0 var(--space-2); }
+.list-body { max-width: 46rem; margin: 0 auto; }
+
+/* Index (tags), grouped by initial */
+.index-groups {
+  max-width: 46rem;
+  margin: 0 auto;
+  columns: 3 12rem;
+  column-gap: var(--space-6);
+}
+.index-letter { break-inside: avoid; margin-bottom: var(--space-5); }
+.index-letter h2 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--f-display);
+  font-size: var(--step-2);
+  color: var(--gold);
+  line-height: 1;
+}
+.index-letter ul { list-style: none; margin: 0; padding: 0; }
+.index-letter li { display: flex; align-items: baseline; gap: var(--space-2); }
+.index-letter a { color: var(--parchment); text-decoration: none; }
+.index-letter a:hover { color: var(--accent); }
+.index-letter .count { color: var(--parchment-dim); font-size: .85em; }
+
+/* Catalogue (archive), grouped by year */
+.catalogue-year { margin-bottom: var(--space-7); }
+.catalogue-year > h2 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-4);
+  font-size: var(--step-2);
+  color: var(--gold);
+  letter-spacing: .06em;
+}
+.catalogue-year > h2::after { content: ""; flex: 1; border-top: 1px solid var(--ink-2); transform: translateY(-.35em); }
+.catalogue-year > h2 .arabic {
+  font-family: var(--f-body);
+  font-size: .5em;
+  color: var(--parchment-dim);
+  letter-spacing: .04em;
+}
+
+/* 404 */
+.lacuna { max-width: var(--measure); margin: var(--space-8) auto 0; text-align: center; }
+.lacuna h1 { font-size: var(--step-5); font-style: italic; font-weight: 500; margin: 0; }
+.lacuna .gap { font-family: var(--f-display); font-size: var(--step-2); color: var(--gold); letter-spacing: .3em; margin: var(--space-4) 0; }
+.lacuna p { color: var(--parchment-dim); }

@@ -1,0 +1,83 @@
+# Example site for the Scriptorium theme.
+# Run from this folder:  hugo server --themesDir ../..
+# (the theme folder must be named "scriptorium", which it is when cloned normally)
+
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Scriptorium'
+theme = 'scriptorium'
+capitalizeListTitles = false
+
+[params]
+  tagline = 'A Dark Academia theme for Hugo.'
+  description = 'The example site for the Scriptorium Hugo theme.'
+  author = 'Your Name'
+  wordmarkLight = 'S'        # set the first S in gold, like an illuminated initial
+  colophon = 'Set in EB Garamond and Cormorant, with code in JetBrains Mono. Built with Hugo and Scriptorium.'
+
+  postSections = ['essays', 'code', 'notes']
+  [params.topics.essays]
+    label = 'Essays'
+    glyph = '✠'
+    accent = 'rubric'
+    art = 'tracery'
+  [params.topics.code]
+    label = 'Code'
+    glyph = '{ }'
+    monoglyph = true
+    accent = 'verdigris'
+    art = 'circuit'
+  [params.topics.notes]
+    label = 'Notes'
+    glyph = '¶'
+    accent = 'lapis'
+    art = 'vine'
+
+  [params.scriptTagger]
+    enable = true
+    translation = 'ESV'
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false
+    [markup.goldmark.parser.attribute]
+      block = true
+  [markup.highlight]
+    noClasses = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[pagination]
+  pagerSize = 20
+
+[taxonomies]
+  tag = 'tags'
+
+[menus]
+  [[menus.main]]
+    name = 'Essays'
+    pageRef = '/essays'
+    weight = 10
+  [[menus.main]]
+    name = 'Code'
+    pageRef = '/code'
+    weight = 20
+  [[menus.main]]
+    name = 'Notes'
+    pageRef = '/notes'
+    weight = 30
+  [[menus.main]]
+    name = 'Catalogue'
+    pageRef = '/catalogue'
+    weight = 40
+  [[menus.main]]
+    name = 'Index'
+    pageRef = '/tags'
+    weight = 50
+  [[menus.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 60

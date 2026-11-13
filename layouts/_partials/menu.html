@@ -1,0 +1,30 @@
+{{- /* Section links plus the search / theme / menu buttons. On phones (with JavaScript)
+   the links fold away behind the menu button; without JavaScript they stay visible. */ -}}
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+<div class="nav-area">
+  <nav class="site-nav" id="site-nav" aria-label="{{ T "mainMenu" }}">
+    <ul>
+      {{- range index site.Menus $menuID }}
+        {{- $current := or ($page.IsMenuCurrent $menuID .) ($page.HasMenuCurrent $menuID .) }}
+      <li><a href="{{ .URL }}"{{ if $current }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
+  <div class="nav-tools">
+    {{- with site.GetPage "/search" }}
+    <a class="nav-icon" href="{{ .RelPermalink }}" aria-label="{{ T "search" }}" title="{{ T "searchShortcut" }}" data-search-link{{ if eq $page . }} aria-current="page"{{ end }}>
+      <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.3 15.3 21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </a>
+    {{- end }}
+    <button class="nav-icon theme-toggle" type="button" data-theme-toggle aria-label="{{ T "switchTheme" }}" title="{{ T "switchTheme" }}">
+      <span class="moon" aria-hidden="true">☾</span><span class="sun" aria-hidden="true">☀</span>
+    </button>
+    <button class="nav-icon menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="{{ T "menu" }}" data-menu-toggle data-label-open="{{ T "menu" }}" data-label-close="{{ T "closeMenu" }}">
+      <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false">
+        <path class="bars" d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path class="cross" d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</div>

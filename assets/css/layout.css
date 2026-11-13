@@ -1,0 +1,163 @@
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+
+/* ── Masthead ─────────────────────────────────────── */
+.masthead { padding-block: var(--space-6) 0; }
+.masthead-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-6);
+}
+.wordmark {
+  font-family: var(--f-mark);
+  font-weight: 400;
+  font-size: var(--step-5);
+  line-height: 1;
+  color: var(--parchment);
+  text-decoration: none;
+  letter-spacing: .01em;
+}
+.wordmark .lux { color: var(--gold); }
+/* params.wordmarkFont = 'display' swaps the blackletter for the heading face. */
+.wordmark-display { font-family: var(--f-display); font-weight: 600; letter-spacing: .02em; }
+.wordmark:hover { color: var(--parchment); }
+.kind-page .wordmark,
+.kind-section .wordmark,
+.kind-taxonomy .wordmark,
+.kind-term .wordmark,
+.kind-404 .wordmark { font-size: var(--step-3); }
+
+.tagline {
+  margin: var(--space-2) 0 0;
+  font-style: italic;
+  color: var(--parchment-dim);
+}
+.masthead .tagline { display: none; }
+.kind-home .masthead .tagline { display: block; }
+
+.nav-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+}
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+}
+.site-nav a {
+  color: var(--parchment);
+  text-decoration: none;
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+  font-size: 1.15em;
+}
+.site-nav a:hover,
+.site-nav a[aria-current] { color: var(--gold); }
+
+.nav-tools { display: flex; align-items: center; gap: var(--space-2); }
+.nav-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+  color: var(--parchment);
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nav-icon:hover,
+.nav-icon[aria-current],
+.nav-icon[aria-expanded="true"] { border-color: var(--gold); color: var(--gold); }
+.theme-toggle { color: var(--gold); }
+
+.menu-toggle { display: none; }
+.menu-toggle .cross { display: none; }
+.menu-toggle[aria-expanded="true"] .bars { display: none; }
+.menu-toggle[aria-expanded="true"] .cross { display: inline; }
+
+/* Phones: wordmark and buttons on one line; section links fold into a list under the menu button. */
+@media (max-width: 719px) {
+  .masthead { padding-block: var(--space-4) 0; }
+  .masthead-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .masthead .wordmark { font-size: clamp(1.6rem, 7vw, 2.2rem); white-space: nowrap; }
+  .nav-area { display: contents; }
+  .nav-tools { grid-column: 2; grid-row: 1; }
+  .site-nav { grid-column: 1 / -1; }
+
+  .js .menu-toggle { display: inline-grid; }
+  .js .site-nav:not(.open) { display: none; }
+  .js .site-nav ul { flex-direction: column; align-items: stretch; gap: 0; border-top: 1px solid var(--ink-2); }
+  .js .site-nav li { border-bottom: 1px solid var(--ink-2); }
+  .js .site-nav a { display: block; padding: var(--space-2) var(--space-1); font-size: 1.2em; }
+  .js .site-nav a[aria-current]::before { content: "✠ "; font-size: .8em; }
+  .double-rule { margin-top: var(--space-4); }
+}
+
+/* The icon shows the theme you'd switch to: a sun in dark mode, a moon in light mode. */
+.theme-toggle .moon { display: none; }
+:root[data-theme="light"] .theme-toggle .moon { display: inline; }
+:root[data-theme="light"] .theme-toggle .sun { display: none; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-toggle .moon { display: inline; }
+  :root:not([data-theme="dark"]) .theme-toggle .sun { display: none; }
+}
+
+/* thin rule over a gold double rule */
+.double-rule {
+  height: 7px;
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--ink-2);
+  border-bottom: 3px double var(--gold);
+}
+
+/* ── Colophon ─────────────────────────────────────── */
+.colophon {
+  margin-top: var(--space-8);
+  padding-block: 0 var(--space-7);
+  text-align: center;
+  color: var(--parchment-dim);
+  font-size: .95em;
+}
+.colophon .double-rule { margin: 0 0 var(--space-5); transform: scaleY(-1); }
+.colophon .mark {
+  font-family: var(--f-mark);
+  font-size: 1.8rem;
+  color: var(--parchment);
+  line-height: 1;
+}
+.colophon .mark .lux { color: var(--gold); }
+.colophon p { margin: var(--space-2) 0 0; }
+.colophon .year {
+  font-variant-caps: all-small-caps;
+  letter-spacing: .1em;
+  color: var(--gold);
+}
+.colophon a { color: var(--parchment-dim); }
+.colophon a:hover { color: var(--gold); }
+.colophon .sep { color: var(--gold); margin-inline: .4em; }

@@ -1,0 +1,22 @@
+{{ define "main" }}
+<header class="list-head">
+  <h1>{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="intro">{{ . }}</div>
+  {{- end }}
+</header>
+<div class="list-body">
+  {{- $posts := partialCached "posts.html" "posts" }}
+  {{- range $posts.GroupByDate "2006" }}
+  {{- $year := int .Key }}
+  <section class="catalogue-year" aria-label="{{ $year }}">
+    <h2><span aria-hidden="true">{{ partial "roman.html" $year }}</span><span class="arabic">{{ $year }}</span></h2>
+    <ol class="entries">
+      {{- range .Pages }}{{ partial "entry.html" . }}{{ end }}
+    </ol>
+  </section>
+  {{- else }}
+  <p class="entries-empty">{{ T "catalogueEmpty" }}</p>
+  {{- end }}
+</div>
+{{ end }}

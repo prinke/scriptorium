@@ -1,0 +1,8 @@
+{{- /* A post's body as plain text for the search index, without verse numbers,
+   footnote markers, footnotes' back-links or heading § anchors. */ -}}
+{{- $html := string .Content -}}
+{{- $html = replaceRE `<sup class="verse">[^<]*</sup>` "" $html -}}
+{{- $html = replaceRE `<sup id="fnref[^"]*"><a[^>]*>[^<]*</a></sup>` "" $html -}}
+{{- $html = replaceRE `<a[^>]*class="(anchor|footnote-backref)"[^>]*>[^<]*</a>` "" $html -}}
+{{- $html = replaceRE `</(p|li|h[1-6]|blockquote|figcaption|dd|dt|td|th|pre)>` "$0 " $html -}}
+{{- return ($html | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace) -}}

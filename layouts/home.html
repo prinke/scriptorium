@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{ partial "epigraph.html" . }}
+  {{- with .Content }}
+  <div class="home-intro">{{ . }}</div>
+  {{- end }}
+  <section class="contents" aria-labelledby="contents-h">
+    <h2 id="contents-h">{{ T "contents" }}</h2>
+    {{- $posts := partialCached "posts.html" "posts" }}
+    {{- $pager := .Paginate $posts.ByDate.Reverse }}
+    {{- with $pager.Pages }}
+    <ol class="entries" reversed>
+      {{- range . }}{{ partial "entry.html" . }}{{ end }}
+    </ol>
+    {{- else }}
+    <p class="entries-empty">{{ T "noPosts" }}</p>
+    {{- end }}
+    {{ partial "pagination.html" $pager }}
+  </section>
+{{ end }}

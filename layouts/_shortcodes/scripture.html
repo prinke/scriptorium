@@ -1,0 +1,17 @@
+{{- /* Scripture quotation. Verse numbers in square brackets become superscripts.
+  {{< scripture ref="John 1:1–2" version="ESV" >}}
+  [1] In the beginning was the Word… [2] He was in the beginning with God.
+  {{< /scripture >}}
+  Optional: link="https://…" to make the reference a link.
+*/ -}}
+{{- $html := .Inner | strings.TrimSpace | .Page.RenderString (dict "display" "block") -}}
+{{- $html = replaceRE `\[(\d+(?::\d+)?)\]\s*` `<sup class="verse">$1</sup>` (string $html) -}}
+<figure class="scripture">
+  <blockquote>{{ $html | safeHTML }}</blockquote>
+  {{- with .Get "ref" }}
+  <figcaption>
+    <cite>{{ with $.Get "link" }}<a href="{{ . }}">{{ $.Get "ref" }}</a>{{ else }}{{ . }}{{ end }}</cite>
+    {{- with $.Get "version" }} · <abbr>{{ . }}</abbr>{{ end }}
+  </figcaption>
+  {{- end }}
+</figure>

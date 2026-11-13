@@ -1,0 +1,20 @@
+{{- /* A quotation in a pointed arch. Uses front matter `epigraph` or rotates daily through data/epigraphs. */ -}}
+{{- $e := .Params.epigraph }}
+{{- if not $e }}
+  {{- with hugo.Data.epigraphs }}
+    {{- $e = index . (mod now.YearDay (len .)) }}
+  {{- end }}
+{{- end }}
+{{- with $e }}
+<figure class="epigraph">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M1 100 V42 C1 22 28 8 50 0.5 C72 8 99 22 99 42 V100"/>
+    <path class="inner" d="M4 100 V43 C4 25 30 12 50 5 C70 12 96 25 96 43 V100"/>
+  </svg>
+  <span class="keystone" aria-hidden="true">✠</span>
+  <blockquote><p>{{ .text | markdownify }}</p></blockquote>
+  {{- with .source }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>
+{{- end }}

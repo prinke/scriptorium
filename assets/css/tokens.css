@@ -1,0 +1,86 @@
+/* Nocturne (dark) is the default. Vellum (light) follows the OS setting unless the
+   reader has chosen a theme with the toggle, which sets data-theme on <html>. */
+:root {
+  --ink-0: #14110F;
+  --ink-1: #1C1815;
+  --ink-2: #28211C;
+  --parchment: #E6DCC6;
+  --parchment-dim: #A8997E;
+  --gold: #C2A066;
+  --rubric: #CC6F5C;
+  --oxblood: #7A2626;
+  --verdigris: #7FA894;
+  --lapis: #8FA6CC;
+  --on-oxblood: #F3EBDC;
+  --grain-opacity: .05;
+  --vignette: rgba(0, 0, 0, .45);
+  --art-opacity: .16;
+  color-scheme: dark;
+
+  --f-mark: "UnifrakturMaguntia", "Old English Text MT", serif;
+  --f-display: "Cormorant Garamond", "EB Garamond", Garamond, Georgia, serif;
+  --f-body: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --f-hebrew: "Frank Ruhl Libre", "Times New Roman", serif;
+
+  --step--1: .85rem;
+  --step-0: clamp(1.15rem, 1rem + .5vw, 1.3rem);
+  --step-1: 1.45rem;
+  --step-2: 1.8rem;
+  --step-3: 2.25rem;
+  --step-4: clamp(2.2rem, 1.6rem + 2.4vw, 2.8rem);
+  --step-5: clamp(2.4rem, 1.4rem + 4vw, 3.6rem);
+
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --measure: 66ch;
+  --margin-col: 15rem;
+  --margin-gap: 3.5rem;
+  --radius: 2px;
+
+  /* Topic accent; overridden per section below. */
+  --accent: var(--rubric);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink-0: #F2EADA;
+    --ink-1: #E9DFC9;
+    --ink-2: #D6C8AC;
+    --parchment: #2A211B;
+    --parchment-dim: #65564A;
+    --gold: #8A6A2F;
+    --rubric: #8B2E2E;
+    --verdigris: #3D6B57;
+    --lapis: #34508A;
+    --grain-opacity: .07;
+    --vignette: rgba(90, 60, 30, .18);
+    --art-opacity: .22;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --ink-0: #F2EADA;
+  --ink-1: #E9DFC9;
+  --ink-2: #D6C8AC;
+  --parchment: #2A211B;
+  --parchment-dim: #65564A;
+  --gold: #8A6A2F;
+  --rubric: #8B2E2E;
+  --verdigris: #3D6B57;
+  --lapis: #34508A;
+  --grain-opacity: .07;
+  --vignette: rgba(90, 60, 30, .18);
+  --art-opacity: .22;
+  color-scheme: light;
+}
+
+/* Each section's accent and margin art come from params.topics in hugo.toml,
+   set inline on <body> and on list entries. */

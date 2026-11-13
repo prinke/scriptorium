@@ -1,0 +1,15 @@
+{{- /* Code block with a header: optional filename, language label, copy button.
+  ```rust {title="src/lexer.rs"}
+*/ -}}
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $lang := .Type -}}
+{{- $names := dict "rs" "Rust" "rust" "Rust" "go" "Go" "py" "Python" "python" "Python" "js" "JavaScript" "javascript" "JavaScript" "ts" "TypeScript" "typescript" "TypeScript" "sh" "Shell" "bash" "Shell" "zsh" "Shell" "fish" "Shell" "html" "HTML" "css" "CSS" "toml" "TOML" "yaml" "YAML" "json" "JSON" "sql" "SQL" "c" "C" "cpp" "C++" "md" "Markdown" "go-html-template" "Hugo" "text" "" "txt" "" "plain" "" -}}
+{{- $label := $lang -}}
+{{- with index $names $lang }}{{ $label = . }}{{ else }}{{ if isset $names $lang }}{{ $label = "" }}{{ end }}{{ end -}}
+<figure class="codeblock">
+  <figcaption class="codeblock-head">
+    {{- with .Attributes.title }}<span class="file">{{ . }}</span>{{ end }}
+    <span class="tools">{{ with $label }}<span class="lang">{{ . }}</span>{{ end }}<button class="copy" type="button" data-copy hidden>Copy</button></span>
+  </figcaption>
+  {{ $result.Wrapped }}
+</figure>

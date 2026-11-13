@@ -1,0 +1,30 @@
+{{ define "main" }}
+<header class="list-head">
+  <h1>{{ .Title }}</h1>
+  {{- with .Content }}
+  <div class="intro">{{ . }}</div>
+  {{- end }}
+</header>
+{{- $terms := .Data.Terms.Alphabetical }}
+{{- $letters := slice }}
+{{- range $terms }}{{ $letters = $letters | append (upper (substr .Page.LinkTitle 0 1)) }}{{ end }}
+{{- with uniq $letters }}
+<div class="index-groups">
+  {{- range . }}
+  {{- $l := . }}
+  <section class="index-letter" aria-label="{{ $l }}">
+    <h2 aria-hidden="true">{{ $l }}</h2>
+    <ul>
+      {{- range $terms }}
+      {{- if eq (upper (substr .Page.LinkTitle 0 1)) $l }}
+      <li><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a><span class="count">{{ .Count }}</span></li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>
+{{- else }}
+<p class="entries-empty">{{ T "indexEmpty" }}</p>
+{{- end }}
+{{ end }}

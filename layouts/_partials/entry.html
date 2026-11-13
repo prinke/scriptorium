@@ -1,0 +1,14 @@
+{{- $pos := partialCached "post-position.html" . .RelPermalink }}
+{{- $topic := partial "topic.html" . }}
+<li class="entry topic-{{ .Section }}" style="{{ $topic.style }}">
+  <span class="no">{{ partial "roman.html" $pos.number }}</span>
+  {{ partial "glyph.html" . }}<span class="visually-hidden">{{ $topic.label }}:</span>
+  <span class="line">
+    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    <span class="leader" aria-hidden="true"></span>
+    <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2 Jan 2006" }}</time>
+  </span>
+  {{- with .Params.dek }}
+  <p class="entry-dek">{{ . | markdownify }}</p>
+  {{- end }}
+</li>

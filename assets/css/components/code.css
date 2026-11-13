@@ -1,0 +1,80 @@
+code, pre, kbd, samp {
+  font-family: var(--f-mono);
+  font-variant-ligatures: none;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+:not(pre) > code {
+  font-size: .8em;
+  padding: .1em .35em;
+  background: var(--ink-1);
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+  overflow-wrap: anywhere;
+}
+kbd {
+  font-size: .78em;
+  padding: .05em .4em;
+  border: 1px solid var(--ink-2);
+  border-bottom-width: 2px;
+  border-radius: var(--radius);
+}
+
+.codeblock {
+  margin: var(--space-6) 0;
+  background: var(--ink-1);
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+}
+.codeblock-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--ink-2);
+  color: var(--parchment-dim);
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+  font-size: .95em;
+}
+.codeblock-head .file {
+  font-family: var(--f-mono);
+  font-variant-caps: normal;
+  letter-spacing: 0;
+  font-size: .75em;
+  color: var(--parchment);
+  overflow-wrap: anywhere;
+}
+.codeblock-head .tools { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
+.copy {
+  background: none;
+  border: 1px solid var(--ink-2);
+  border-radius: var(--radius);
+  color: var(--parchment-dim);
+  font-size: .85em;
+  font-variant-caps: all-small-caps;
+  letter-spacing: .08em;
+  padding: 0 .5rem;
+  cursor: pointer;
+}
+.copy:hover { color: var(--gold); border-color: var(--gold); }
+
+.codeblock .highlight,
+.codeblock pre { margin: 0; }
+.codeblock .highlight > .chroma { overflow-x: auto; }
+
+/* line numbers (linenos=true) render as a two-cell table */
+.codeblock .lntable { border-spacing: 0; padding: 0; margin: 0; }
+.codeblock .lntd { padding: 0; vertical-align: top; }
+.codeblock .lntd pre { overflow: visible; }
+.codeblock .lntd:first-child pre { padding-right: 0; }
+.codeblock .lntd:last-child pre { padding-left: var(--space-2); }
+.codeblock pre {
+  padding: var(--space-4);
+  overflow-x: auto;
+  font-size: .82rem;
+  line-height: 1.65;
+  color: var(--parchment);
+  background: transparent !important;
+  tab-size: 4;
+}

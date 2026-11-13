@@ -1,0 +1,3 @@
+{{- $t := partial "topic.html" . -}}
+<span class="glyph{{ if $t.mono }} glyph-mono{{ end }}" aria-hidden="true">{{ $t.glyph }}</span>
+{{- /**/ -}}

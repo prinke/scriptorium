@@ -1,0 +1,13 @@
+name = "Scriptorium"
+license = "GPL-3.0"
+licenselink = "https://github.com/prinke/scriptorium/blob/main/LICENSE"
+description = "A Dark Academia blog theme: candlelit dark mode and parchment light mode, blackletter wordmark, drop caps, margin notes, scripture and code typeset with equal care, built-in search."
+homepage = "https://github.com/prinke/scriptorium"
+demosite = "https://lux.prinke.dev"
+tags = ["blog", "dark", "light", "typography", "personal", "search", "responsive", "minimal", "academic"]
+features = ["dark mode", "light mode", "search", "margin notes", "footnotes", "syntax highlighting", "self-hosted fonts", "giscus comments", "rss", "no javascript required"]
+min_version = "0.158.0"
+
+[author]
+  name = "prinke"
+  homepage = "https://prinke.dev"

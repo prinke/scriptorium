@@ -1,0 +1,54 @@
+# Defaults for the Scriptorium theme. Anything here can be overridden in the site's hugo.toml.
+
+[params]
+  # Sections whose pages are numbered posts (shown on the home page, in search, etc.).
+  postSections = ['posts']
+  wordmarkLight = ''   # a word in the title to set in gold, e.g. 'Lux'
+  wordmarkFont = 'blackletter'  # or 'display' for the plainer heading face
+  marginArt = true     # line art in the side margins on wide screens
+  homeArt = 'rose'     # margin art on the home page: rose, tracery, circuit, vine or none
+  defaultArt = 'tracery'
+
+  # One block per post section. accent: rubric, verdigris, lapis, gold, oxblood or parchment.
+  [params.topics.posts]
+    label = 'Writings'
+    glyph = '❦'
+    accent = 'rubric'
+    art = 'tracery'
+
+  # Blue Letter Bible ScriptTagger: verse pop-ups on scripture references in post bodies.
+  [params.scriptTagger]
+    enable = false
+    translation = 'ESV'
+    hyperLinks = 'hover'
+    style = 'par'
+    noSearchClassNames = ''
+
+  [params.giscus]
+    repo = ''
+    repoId = ''
+    category = ''
+    categoryId = ''
+    mapping = 'pathname'
+
+# Note: Hugo does not read [markup] from a theme. Copy this into the site's hugo.toml:
+# [markup]
+#   [markup.goldmark.renderer]
+#     unsafe = true
+#   [markup.highlight]
+#     noClasses = false
+#   [markup.tableOfContents]
+#     startLevel = 2
+#     endLevel = 3
+
+# Search index output, used by content/search.md (outputs = ['html', 'SearchIndex']).
+[outputFormats.SearchIndex]
+  mediaType = 'application/json'
+  baseName = 'index'
+  isPlainText = true
+  notAlternative = true
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = '0.158.0'

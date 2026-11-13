@@ -1,0 +1,36 @@
+/* Syntax colors built from the palette: gold keywords, verdigris strings,
+   rubric numbers, dim italic comments. Works in both themes via tokens. */
+.chroma { color: var(--parchment); background: transparent; }
+.chroma .err { color: inherit; } /* lexers flag valid snippets (e.g. TOML +++ fences) as errors; don't shout */
+.chroma .hl { display: block; background: color-mix(in srgb, var(--gold) 12%, transparent); }
+.chroma .lnt, .chroma .ln { color: var(--parchment-dim); opacity: .6; padding-right: 1em; user-select: none; }
+.chroma .lntable { border-spacing: 0; }
+.chroma .lntd { vertical-align: top; padding: 0; }
+
+/* keywords */
+.chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .ow) { color: var(--gold); }
+/* types, classes, builtins */
+.chroma :is(.kt, .nc, .nn, .bp) { color: var(--gold); font-style: italic; }
+.chroma .nb { color: var(--gold); font-style: italic; }
+/* names */
+.chroma :is(.n, .nx, .nv, .vc, .vg, .vi) { color: var(--parchment); }
+.chroma :is(.nf, .fm) { color: var(--parchment); text-decoration: underline; text-decoration-color: var(--ink-2); text-underline-offset: .25em; }
+.chroma :is(.na, .nt, .nd) { color: var(--verdigris); }
+.chroma .nl { color: var(--parchment-dim); }
+/* strings */
+.chroma :is(.s, .sa, .sb, .sc, .dl, .sd, .s1, .s2, .sh, .si, .sx, .sr, .ss) { color: var(--verdigris); }
+.chroma .se { color: var(--rubric); }
+/* numbers & literals */
+.chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .l, .ld) { color: var(--rubric); }
+/* comments */
+.chroma :is(.c, .ch, .cm, .c1, .cs, .cp, .cpf) { color: var(--parchment-dim); font-style: italic; }
+.chroma :is(.cp, .cpf) { font-style: normal; color: var(--gold); }
+/* operators & punctuation */
+.chroma :is(.o, .p) { color: var(--parchment-dim); }
+/* diffs & generic */
+.chroma .gd { color: var(--rubric); }
+.chroma .gi { color: var(--verdigris); }
+.chroma .gh, .chroma .gu { color: var(--gold); font-weight: 500; }
+.chroma .ge { font-style: italic; }
+.chroma .gs { font-weight: 500; }
+.chroma .gp { color: var(--parchment-dim); user-select: none; }
